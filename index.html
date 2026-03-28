@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKIN CODE — 男性スキンケア診断</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #f7fbff;
+    --bg2:       #eef5fd;
+    --bg3:       #ddeefa;
+    --white:     #ffffff;
+    --blue:      #2b7be0;
+    --blue-mid:  #1a5eb8;
+    --blue-dark: #0f3d8a;
+    --blue-light:#dbeafe;
+    --blue-pale: #f0f7ff;
+    --navy:      #0e2a56;
+    --border:    rgba(43,123,224,0.13);
+    --border-md: rgba(43,123,224,0.26);
+    --text:      #0f1c2e;
+    --text-mid:  #2b4a72;
+    --muted:     #6b8aab;
+    --muted2:    #9eb6cc;
+    --danger:    #e05050;
+    --danger-bg: rgba(224,80,80,0.07);
+    --warn:      #d08030;
+    --warn-bg:   rgba(208,128,48,0.08);
+    --safe:      #2a9060;
+    --safe-bg:   rgba(42,144,96,0.08);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', 'Noto Sans JP', sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--blue-light), var(--blue), var(--blue-mid), var(--blue-light));
+    background-size: 200% 100%; animation: wave 4s linear infinite; z-index: 100;
+  }
+  @keyframes wave { 0%{background-position:0 0} 100%{background-position:200% 0} }
+  body::after {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image: radial-gradient(circle, rgba(43,123,224,0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .wrap { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+
+  /* Header */
+  .site-header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--border-md); margin-bottom: 2.5rem; }
+  .logo-row { display: flex; align-items: flex-end; gap: 1rem; margin-bottom: 0.5rem; }
+  .logo { font-family: 'DM Sans', sans-serif; font-size: clamp(2rem,6vw,2.8rem); font-weight: 500; letter-spacing: 0.06em; color: var(--navy); }
+  .logo em { color: var(--blue); font-style: normal; }
+  .logo-badge { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em; color: var(--blue); text-transform: uppercase; border: 1px solid var(--border-md); background: var(--blue-pale); padding: 0.2rem 0.7rem; border-radius: 50px; margin-bottom: 0.4rem; }
+  .header-desc { font-size: 0.86rem; color: var(--muted); line-height: 1.9; max-width: 480px; }
+
+  /* Progress */
+  .progress-wrap { margin-bottom: 2rem; }
+  .progress-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+  .progress-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
+  .progress-frac { font-size: 0.78rem; font-weight: 500; color: var(--blue); }
+  .progress-track { height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--blue-light), var(--blue)); width: 0%; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); border-radius: 99px; }
+
+  /* Quiz */
+  #quiz-screen { animation: fadeup 0.4s ease; }
+  @keyframes fadeup { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+  .q-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 0.8rem; }
+  .q-step { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; color: var(--white); background: var(--blue); padding: 2px 8px; border-radius: 50px; }
+  .q-category { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em; }
+  .q-text { font-size: clamp(1rem,2.8vw,1.35rem); font-weight: 400; line-height: 1.6; color: var(--navy); margin-bottom: 0.35rem; }
+  .q-hint { font-size: 0.74rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.6; }
+
+  /* Options */
+  .options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.8rem; }
+  .opt { display: flex; align-items: flex-start; gap: 12px; padding: 0.85rem 1rem; border: 1px solid var(--border-md); background: var(--white); border-radius: 10px; cursor: pointer; transition: all 0.18s; text-align: left; width: 100%; color: var(--text); }
+  .opt:hover { border-color: var(--blue); background: var(--blue-pale); }
+  .opt.selected { border-color: var(--blue); background: var(--blue-pale); box-shadow: 0 0 0 3px rgba(43,123,224,0.1); }
+  .opt-check { width: 20px; height: 20px; border-radius: 5px; border: 1.5px solid var(--border-md); background: var(--white); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.18s; }
+  .opt.selected .opt-check { background: var(--blue); border-color: var(--blue); }
+  .opt-check-mark { width: 11px; height: 11px; opacity: 0; transition: opacity 0.15s; }
+  .opt.selected .opt-check-mark { opacity: 1; }
+  .opt-body { flex: 1; }
+  .opt-text { font-size: 0.88rem; font-weight: 400; color: var(--text); line-height: 1.4; }
+  .opt-sub  { font-size: 0.72rem; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+
+  /* Nav */
+  .nav-row { display: flex; gap: 8px; }
+  .btn-back { padding: 0.82rem 1.2rem; background: var(--white); border: 1px solid var(--border-md); border-radius: 8px; font-size: 0.8rem; color: var(--muted); cursor: pointer; transition: all 0.2s; }
+  .btn-back:hover { border-color: var(--blue); color: var(--blue); }
+  .btn-next { flex: 1; padding: 0.85rem 1.5rem; background: var(--blue); color: var(--white); border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s; }
+  .btn-next:hover:not(:disabled) { background: var(--blue-mid); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(43,123,224,0.25); }
+  .btn-next:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  /* Loading */
+  #loading-screen { display: none; text-align: center; padding: 4rem 0; animation: fadeup 0.4s ease; }
+  .loader-ring-wrap { position: relative; width: 64px; height: 64px; margin: 0 auto 2rem; }
+  .loader-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid transparent; border-top-color: var(--blue); animation: spin 1s linear infinite; }
+  .loader-ring:nth-child(2) { inset: 8px; border-top-color: var(--blue-light); animation-duration: 0.75s; animation-direction: reverse; }
+  .loader-ring:nth-child(3) { inset: 16px; border-top-color: rgba(43,123,224,0.4); animation-duration: 0.5s; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-phase { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; transition: opacity 0.2s; min-height: 1.4rem; }
+  .loading-title { font-size: 1rem; font-weight: 500; color: var(--navy); margin-top: 0.4rem; letter-spacing: 0.05em; }
+
+  /* Result */
+  #result-screen { display: none; animation: fadeup 0.6s ease; }
+  .result-section { background: var(--white); border: 1px solid var(--border-md); border-radius: 14px; overflow: hidden; margin-bottom: 10px; }
+  .result-hero { padding: 2rem; background: linear-gradient(135deg, var(--blue-pale) 0%, var(--white) 60%); border-bottom: 1px solid var(--border); }
+  .result-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--blue); text-transform: uppercase; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+  .result-eyebrow::before { content: ''; width: 18px; height: 2px; background: var(--blue); border-radius: 99px; }
+  .result-type { font-size: clamp(1.4rem,5vw,2.1rem); font-weight: 500; color: var(--navy); letter-spacing: 0.02em; margin-bottom: 0.3rem; }
+  .result-type-ja { font-size: 0.78rem; color: var(--blue); font-weight: 400; margin-bottom: 0.8rem; letter-spacing: 0.05em; }
+  .result-tagline { font-size: 0.84rem; color: var(--muted); line-height: 1.85; max-width: 480px; }
+  .pattern-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.65rem; font-weight: 500; padding: 3px 10px; border-radius: 50px; border: 1px solid; margin-bottom: 1rem; }
+
+  /* Score bars */
+  .score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 1.5rem; }
+  @media (max-width: 480px) { .score-grid { grid-template-columns: 1fr; } }
+  .score-meta { display: flex; justify-content: space-between; margin-bottom: 5px; }
+  .score-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
+  .score-val { font-size: 0.62rem; font-weight: 500; color: var(--blue); }
+  .score-track { height: 3px; background: var(--bg3); border-radius: 99px; }
+  .score-bar { height: 3px; background: linear-gradient(90deg, var(--blue-light), var(--blue)); width: 0%; transition: width 1s cubic-bezier(0.4,0,0.2,1); border-radius: 99px; }
+
+  /* Match scores */
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 1rem; }
+  @media (max-width: 480px) { .match-grid { grid-template-columns: 1fr; } }
+  .match-item { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); font-size: 0.72rem; }
+  .match-item.top { border-color: var(--blue); background: var(--blue-pale); }
+  .match-name { flex: 1; color: var(--text-mid); }
+  .match-bar-wrap { width: 50px; height: 3px; background: var(--bg3); border-radius: 99px; }
+  .match-bar { height: 3px; border-radius: 99px; transition: width 1s ease; }
+  .match-pct { font-weight: 500; color: var(--blue); min-width: 28px; text-align: right; }
+
+  /* Share */
+  .share-row { display: flex; gap: 6px; margin-top: 1.4rem; }
+  .share-btn { display: inline-flex; align-items: center; gap: 5px; padding: 0.42rem 0.9rem; border-radius: 50px; border: 1px solid var(--border-md); font-size: 0.7rem; color: var(--muted); text-decoration: none; cursor: pointer; background: var(--white); transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+  .share-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-pale); }
+
+  /* Panel */
+  .panel { padding: 1.6rem; border-top: 1px solid var(--border); }
+  .panel-title { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em; color: var(--blue); text-transform: uppercase; margin-bottom: 1.1rem; display: flex; align-items: center; gap: 0.6rem; }
+  .panel-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* Cleansing notice */
+  .cleansing-notice { display: flex; align-items: flex-start; gap: 12px; background: var(--blue-pale); border: 1px solid var(--border-md); border-radius: 10px; padding: 1rem 1.1rem; margin-bottom: 1rem; }
+  .cleansing-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+  .cleansing-title { font-size: 0.84rem; font-weight: 500; color: var(--blue-mid); margin-bottom: 0.3rem; }
+  .cleansing-text  { font-size: 0.78rem; color: var(--text-mid); line-height: 1.7; }
+
+  /* Routine */
+  .routine-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 480px) { .routine-cols { grid-template-columns: 1fr; } }
+  .routine-col-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; color: var(--white); background: var(--blue); display: inline-block; padding: 2px 10px; border-radius: 50px; margin-bottom: 0.9rem; }
+  .routine-col-label.pm { background: var(--navy); }
+  .routine-steps { display: flex; flex-direction: column; gap: 7px; }
+  .routine-step { display: flex; align-items: flex-start; gap: 10px; padding: 9px 11px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); transition: border-color 0.18s; }
+  .routine-step:hover { border-color: var(--border-md); }
+  .routine-step.highlight { border-color: var(--blue); background: var(--blue-pale); }
+  .step-num { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--muted2); padding-top: 2px; flex-shrink: 0; }
+  .step-name { font-size: 0.82rem; font-weight: 500; color: var(--navy); margin-bottom: 2px; }
+  .step-note { font-size: 0.72rem; color: var(--muted); line-height: 1.5; }
+
+  /* Ingredients */
+  .ingredient-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ing-tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 50px; border: 1px solid var(--border-md); color: var(--muted); background: var(--white); transition: all 0.18s; }
+  .ing-tag:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-pale); }
+  .ing-tag.key { border-color: var(--blue); color: var(--blue-mid); background: var(--blue-pale); font-weight: 500; }
+
+  /* Advice */
+  .advice-list { display: flex; flex-direction: column; gap: 11px; }
+  .advice-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); }
+  .advice-num { width: 24px; height: 24px; border-radius: 50%; background: var(--blue); color: var(--white); font-size: 0.68rem; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .advice-title { font-size: 0.84rem; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+  .advice-text  { font-size: 0.78rem; color: var(--muted); line-height: 1.75; }
+
+  /* CTA */
+  .cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (max-width: 480px) { .cta-grid { grid-template-columns: 1fr; } }
+  .cta-btn { display: flex; align-items: center; gap: 10px; padding: 0.9rem 1rem; border-radius: 10px; border: 1px solid; text-decoration: none; background: transparent; cursor: pointer; transition: all 0.2s; text-align: left; }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(43,123,224,0.12); }
+  .cta-primary   { border-color: var(--blue); }
+  .cta-primary:hover   { background: var(--blue-pale); }
+  .cta-secondary { border-color: var(--border-md); }
+  .cta-secondary:hover { border-color: var(--blue); background: var(--blue-pale); }
+  .cta-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .cta-body { flex: 1; }
+  .cta-title-text { font-size: 0.82rem; font-weight: 500; color: var(--navy); margin-bottom: 2px; }
+  .cta-desc-text  { font-size: 0.7rem; color: var(--muted); line-height: 1.4; }
+  .cta-arr { color: var(--muted2); font-size: 0.8rem; }
+
+  /* Retake */
+  .retake-btn { display: block; width: 100%; padding: 0.8rem; text-align: center; font-size: 0.76rem; color: var(--muted); background: var(--white); border: 1px solid var(--border-md); border-radius: 8px; cursor: pointer; transition: all 0.2s; margin-top: 0; }
+  .retake-btn:hover { border-color: var(--blue); color: var(--blue); }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--blue-light); border-radius: 99px; }
+
+  /* Product cards */
+  .product-grid { display: flex; flex-direction: column; gap: 10px; }
+  .product-card { display: flex; align-items: flex-start; gap: 12px; padding: 14px; border: 1px solid var(--border-md); border-radius: 10px; background: var(--white); text-decoration: none; transition: all 0.2s; }
+  .product-card:hover { border-color: var(--blue); background: var(--blue-pale); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(43,123,224,0.1); }
+  .product-cat { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; color: var(--white); background: var(--blue); padding: 2px 8px; border-radius: 50px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+  .product-body { flex: 1; }
+  .product-name { font-size: 0.85rem; font-weight: 500; color: var(--navy); margin-bottom: 3px; line-height: 1.4; }
+  .product-price { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--blue); font-weight: 500; margin-bottom: 4px; display: block; }
+  .product-point { font-size: 0.72rem; color: var(--muted); line-height: 1.5; }
+  .product-arr { color: var(--muted2); font-size: 0.8rem; flex-shrink: 0; align-self: center; }
+  .product-notice { font-size: 0.68rem; color: var(--muted); margin-top: 0.8rem; line-height: 1.6; padding: 8px 10px; background: var(--bg); border-radius: 8px; border: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site-header">
+    <div class="logo-row">
+      <div class="logo">SKIN<em>CODE</em></div>
+      <div class="logo-badge">Men's Skincare Diagnosis</div>
+    </div>
+    <p class="header-desc">9つの質問に答えるだけで、あなたの肌質・生活習慣に合った完全パーソナライズのスキンケアルーティンを提案します。複数選択可能な項目があります。</p>
+  </header>
+
+  <div id="quiz-screen">
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span class="progress-label">Progress</span>
+        <span class="progress-frac" id="progress-frac">1 / 9</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+    <div class="q-meta">
+      <span class="q-step" id="q-step">Q1</span>
+      <span class="q-category" id="q-category"></span>
+    </div>
+    <div class="q-text" id="q-text"></div>
+    <div class="q-hint" id="q-hint"></div>
+    <div class="options" id="options-wrap"></div>
+    <div class="nav-row">
+      <button class="btn-back" id="btn-back" onclick="prevQ()">← 戻る</button>
+      <button class="btn-next" id="btn-next" onclick="nextQ()" disabled>次へ →</button>
+    </div>
+  </div>
+
+  <div id="loading-screen">
+    <div class="loader-ring-wrap">
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+    </div>
+    <div class="loading-phase" id="loading-phase">Analyzing skin profile</div>
+    <div class="loading-title">診断中...</div>
+  </div>
+
+  <div id="result-screen"></div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+// QUESTIONS
+// ─────────────────────────────────────────────
+const QUESTIONS = [
+  {
+    id:'afterwash', category:'肌タイプ',
+    text:'洗顔後、何もつけないでいると肌はどうなりますか？',
+    hint:'（1つ選んでください）', multi:false,
+    options:[
+      {text:'すぐにつっぱる・乾燥する',           sub:'インナードライの可能性あり',  value:'dry'},
+      {text:'しばらくするとテカってくる',           sub:'皮脂分泌が多め',             value:'oily'},
+      {text:'Tゾーンのみテカる・頬は普通〜乾燥', sub:'混合肌の典型',               value:'combo'},
+      {text:'とくに変わらず快適',                  sub:'バランスが取れている',       value:'normal'},
+    ]
+  },
+  {
+    id:'trouble', category:'肌の悩み',
+    text:'現在気になる肌の悩みをすべて選んでください。',
+    hint:'（複数選択可）', multi:true,
+    options:[
+      {text:'ニキビ・吹き出物が出やすい', sub:'炎症・皮脂コントロールが課題',   value:'acne'},
+      {text:'毛穴の開き・黒ずみ',         sub:'皮脂詰まりが主な原因',           value:'pore'},
+      {text:'くすみ・色ムラ・シミ',       sub:'ターンオーバーの乱れ',           value:'dull'},
+      {text:'乾燥・肌荒れ・かさつき',     sub:'バリア機能の低下',               value:'dry_c'},
+      {text:'シワ・たるみが気になる',      sub:'エイジングサイン',               value:'aging'},
+      {text:'肌のべたつき',               sub:'過剰皮脂分泌',                   value:'sebum'},
+      {text:'肌が敏感・刺激に弱い',       sub:'ストレス・環境による反応性',      value:'sensitive'},
+    ]
+  },
+  {
+    id:'daily_items', category:'デイリー習慣',
+    text:'日常的に使っているものをすべて選んでください。',
+    hint:'（複数選択可）クレンジング推奨の判定に使用します', multi:true,
+    options:[
+      {text:'日焼け止め（毎日使う）',              sub:'ウォータープルーフ含む',         value:'sunscreen'},
+      {text:'整髪料・ワックス（前髪に触れる）',    sub:'毛穴詰まりの原因になりやすい',   value:'wax'},
+      {text:'BBクリーム・ファンデーション',        sub:'カバー系コスメ使用',             value:'makeup'},
+      {text:'日焼け止め入り保湿クリーム',          sub:'UVカット機能付き',               value:'uv_cream'},
+      {text:'これらは使っていない',                sub:'',                              value:'none', exclusive:true},
+    ]
+  },
+  {
+    id:'lifestyle', category:'ライフスタイル',
+    text:'日常の環境・習慣で当てはまるものを選んでください。',
+    hint:'（複数選択可）', multi:true,
+    options:[
+      {text:'屋外活動・スポーツが多い',   sub:'UVダメージ・汗・外的刺激が大きい',  value:'outdoor'},
+      {text:'デスクワーク・長時間PC使用', sub:'乾燥しやすい環境',                  value:'desk'},
+      {text:'睡眠不足・不規則な生活',     sub:'ターンオーバーが乱れやすい',         value:'irregular'},
+      {text:'飲酒頻度が高い',             sub:'肌の乾燥・くすみに影響',             value:'alcohol'},
+      {text:'喫煙している',               sub:'血流・肌荒れへの影響あり',           value:'smoking'},
+      {text:'比較的規則正しい生活',       sub:'ベース管理がしやすい環境',           value:'regular'},
+    ]
+  },
+  {
+    id:'shaving', category:'ひげ処理',
+    text:'ひげの処理方法を教えてください。',
+    hint:'（1つ選んでください）', multi:false,
+    options:[
+      {text:'毎日カミソリで剃る',       sub:'肌へのダメージが蓄積しやすい',  value:'razor_daily'},
+      {text:'電動シェーバーを使う',     sub:'比較的低刺激',                   value:'electric'},
+      {text:'週に数回まとめて処理する', sub:'肌の回復時間がある',             value:'occasional'},
+      {text:'ひげを伸ばしている',       sub:'ひげケア・保湿が重要',           value:'beard'},
+    ]
+  },
+  {
+    id:'age', category:'年齢',
+    text:'年齢層を教えてください。',
+    hint:'（1つ選んでください）', multi:false,
+    options:[
+      {text:'10代〜20代前半',    sub:'皮脂分泌が活発な時期',         value:'young'},
+      {text:'20代後半〜30代前半',sub:'ライフスタイルの変化期',       value:'mid'},
+      {text:'30代後半〜40代',    sub:'エイジングケアの始め時',       value:'mature'},
+      {text:'50代以降',          sub:'肌質の大きな変化が現れる時期', value:'senior'},
+    ]
+  },
+  {
+    id:'experience', category:'経験度',
+    text:'現在のスキンケアの習慣はどのくらいですか？',
+    hint:'（1つ選んでください）', multi:false,
+    options:[
+      {text:'洗顔のみ、ほかは何もしていない',      sub:'まったくの初心者',      value:'beginner'},
+      {text:'化粧水だけは使っている',              sub:'保湿の基礎はある',      value:'basic'},
+      {text:'化粧水＋乳液・クリームを使っている',  sub:'標準的なケアを実施中', value:'standard'},
+      {text:'美容液・特化アイテムも取り入れている', sub:'上級者・こだわりあり', value:'advanced'},
+    ]
+  },
+  {
+    id:'budget', category:'予算',
+    text:'スキンケアにかけられる月あたりの予算は？',
+    hint:'（1つ選んでください）', multi:false,
+    options:[
+      {text:'〜2,000円',        sub:'コスパ重視のシンプルケア',      value:'low'},
+      {text:'2,000〜5,000円',  sub:'必要なものを厳選',               value:'mid'},
+      {text:'5,000〜15,000円', sub:'効果重視で投資できる',           value:'high'},
+      {text:'15,000円以上',     sub:'プレミアムケアにこだわりたい',  value:'premium'},
+    ]
+  },
+  {
+    id:'goal', category:'ゴール',
+    text:'スキンケアで達成したいことをすべて選んでください。',
+    hint:'（複数選択可）', multi:true,
+    options:[
+      {text:'清潔感のある肌・毛穴を目立たなくしたい', sub:'対人印象UP',         value:'clean'},
+      {text:'ニキビ・肌荒れを根本から改善したい',      sub:'悩みの解決が最優先', value:'fix'},
+      {text:'エイジングを遅らせたい',                  sub:'長期的な肌投資',     value:'anti_age'},
+      {text:'肌のテカリをなくしたい',                  sub:'マットな仕上がり',   value:'matte'},
+      {text:'周囲に「肌きれい」と言われたい',           sub:'見た目の総合印象UP', value:'impress'},
+    ]
+  },
+];
+
+// ─────────────────────────────────────────────
+// 10 SKIN PATTERNS (for scoring)
+// ─────────────────────────────────────────────
+const PATTERNS = [
+  {
+    id:'oily_acne',
+    name:'Oily Acne-Prone',
+    ja:'脂性・ニキビ傾向タイプ',
+    tagline:'皮脂コントロールと低刺激ケアが最優先。洗いすぎによる乾燥→過剰皮脂のループを断ち切ることが改善への第一歩です。',
+    badge:{label:'要注意', color:'#e05050', bg:'rgba(224,80,80,0.08)'},
+    score(a){
+      let s=0;
+      if(a.afterwash?.includes('oily'))  s+=30;
+      if(a.trouble?.includes('acne'))    s+=25;
+      if(a.trouble?.includes('pore'))    s+=15;
+      if(a.trouble?.includes('sebum'))   s+=15;
+      if(a.age?.includes('young'))       s+=10;
+      if(a.goal?.includes('fix'))        s+=10;
+      if(a.goal?.includes('matte'))      s+=10;
+      return s;
+    }
+  },
+  {
+    id:'dry_sensitive',
+    name:'Dry & Sensitive',
+    ja:'乾燥・敏感タイプ',
+    tagline:'バリア機能の修復と保湿の徹底が基本戦略。低刺激処方でじっくりと肌本来の潤いを取り戻しましょう。',
+    badge:{label:'要保湿', color:'#2b7be0', bg:'rgba(43,123,224,0.08)'},
+    score(a){
+      let s=0;
+      if(a.afterwash?.includes('dry'))    s+=30;
+      if(a.trouble?.includes('dry_c'))    s+=25;
+      if(a.trouble?.includes('sensitive'))s+=20;
+      if(a.trouble?.includes('acne'))     s+=5;
+      return s;
+    }
+  },
+  {
+    id:'combo',
+    name:'Combination Skin',
+    ja:'混合肌タイプ',
+    tagline:'Tゾーンと頬で異なるアプローチが必要。部位別ケアで全体のバランスを整えることが肌改善の近道です。',
+    badge:{label:'部位別ケア', color:'#7878d0', bg:'rgba(120,120,208,0.08)'},
+    score(a){
+      let s=0;
+      if(a.afterwash?.includes('combo')) s+=40;
+      if(a.trouble?.includes('pore'))    s+=15;
+      if(a.trouble?.includes('sebum'))   s+=10;
+      if(a.trouble?.includes('dry_c'))   s+=10;
+      return s;
+    }
+  },
+  {
+    id:'aging',
+    name:'Aging Focus',
+    ja:'エイジングケアタイプ',
+    tagline:'ターンオーバーの正常化と抗酸化ケアが核心。早めのアプローチが10年後の肌資産への投資になります。',
+    badge:{label:'エイジング対策', color:'#d08030', bg:'rgba(208,128,48,0.08)'},
+    score(a){
+      let s=0;
+      if(a.trouble?.includes('aging'))   s+=30;
+      if(a.goal?.includes('anti_age'))   s+=25;
+      if(a.age?.includes('mature'))      s+=20;
+      if(a.age?.includes('senior'))      s+=30;
+      if(a.trouble?.includes('dull'))    s+=10;
+      return s;
+    }
+  },
+  {
+    id:'glow',
+    name:'Glow & Clarity',
+    ja:'透明感・清潔感タイプ',
+    tagline:'くすみ除去とトーンアップが目標。適切な角質ケアと美白成分で、清潔感のある明るい肌を目指します。',
+    badge:{label:'透明感UP', color:'#2a9060', bg:'rgba(42,144,96,0.08)'},
+    score(a){
+      let s=0;
+      if(a.trouble?.includes('dull'))    s+=30;
+      if(a.goal?.includes('clean'))      s+=20;
+      if(a.goal?.includes('impress'))    s+=15;
+      if(a.afterwash?.includes('normal'))s+=10;
+      if(a.lifestyle?.includes('desk'))  s+=10;
+      return s;
+    }
+  },
+  {
+    id:'stressed',
+    name:'Stressed & Reactive',
+    ja:'ストレス・環境ダメージ型',
+    tagline:'内外のストレス要因が肌のバリアを崩しています。鎮静ケアと生活リズムの改善を並行して進めましょう。',
+    badge:{label:'鎮静ケア優先', color:'#c04090', bg:'rgba(192,64,144,0.08)'},
+    score(a){
+      let s=0;
+      if(a.lifestyle?.includes('irregular'))  s+=25;
+      if(a.lifestyle?.includes('smoking'))    s+=20;
+      if(a.lifestyle?.includes('alcohol'))    s+=15;
+      if(a.trouble?.includes('sensitive'))    s+=20;
+      if(a.trouble?.includes('acne'))         s+=15;
+      if(a.trouble?.includes('dry_c'))        s+=10;
+      return s;
+    }
+  },
+  {
+    id:'outdoor_uv',
+    name:'Outdoor & UV Damaged',
+    ja:'屋外・紫外線ダメージ型',
+    tagline:'蓄積したUVダメージの修復と今後の予防が急務。日焼け止めの毎日使用と美白ケアを柱にしましょう。',
+    badge:{label:'UV対策急務', color:'#d08030', bg:'rgba(208,128,48,0.08)'},
+    score(a){
+      let s=0;
+      if(a.lifestyle?.includes('outdoor'))        s+=30;
+      if(a.daily_items?.includes('none'))         s+=20;
+      if(!a.daily_items?.includes('sunscreen') &&
+         !a.daily_items?.includes('uv_cream'))    s+=20;
+      if(a.trouble?.includes('dull'))             s+=15;
+      if(a.trouble?.includes('aging'))            s+=10;
+      return s;
+    }
+  },
+  {
+    id:'combo_aging',
+    name:'Combination + Aging',
+    ja:'混合肌×エイジング複合型',
+    tagline:'皮脂コントロールとエイジングケアの両立が必要。軽いテクスチャーで保湿しながらターンオーバーを促します。',
+    badge:{label:'複合ケア', color:'#7878d0', bg:'rgba(120,120,208,0.08)'},
+    score(a){
+      let s=0;
+      if(a.afterwash?.includes('combo'))  s+=20;
+      if(a.trouble?.includes('aging'))    s+=20;
+      if(a.age?.includes('mature'))       s+=20;
+      if(a.age?.includes('senior'))       s+=15;
+      if(a.trouble?.includes('pore'))     s+=10;
+      if(a.goal?.includes('anti_age'))    s+=15;
+      return s;
+    }
+  },
+  {
+    id:'beginner',
+    name:'Clean Start Beginner',
+    ja:'スキンケア初心者タイプ',
+    tagline:'まず3ステップから始めましょう。「洗顔→化粧水→日焼け止め」を2週間続けるだけで肌は大きく変わります。',
+    badge:{label:'ゼロから始める', color:'#2a9060', bg:'rgba(42,144,96,0.08)'},
+    score(a){
+      let s=0;
+      if(a.experience?.includes('beginner'))  s+=40;
+      if(a.budget?.includes('low'))           s+=15;
+      if(a.goal?.includes('clean'))           s+=15;
+      if(a.goal?.includes('impress'))         s+=10;
+      return s;
+    }
+  },
+  {
+    id:'balanced',
+    name:'Balanced Skin',
+    ja:'バランス肌タイプ',
+    tagline:'比較的安定した肌質です。基本のケアを継続しながら、季節や環境の変化に応じたアジャストが鍵になります。',
+    badge:{label:'安定維持', color:'#6b8aab', bg:'rgba(107,138,171,0.08)'},
+    score(a){
+      let s=0;
+      if(a.afterwash?.includes('normal'))   s+=20;
+      if(a.lifestyle?.includes('regular'))  s+=20;
+      if(a.age?.includes('mid'))            s+=10;
+      return s;
+    }
+  },
+];
+
+// ─────────────────────────────────────────────
+// SCORING ENGINE
+// ─────────────────────────────────────────────
+function rankPatterns(answers) {
+  return PATTERNS
+    .map(p => ({ ...p, raw: p.score(answers) }))
+    .sort((a,b) => b.raw - a.raw);
+}
+
+function normalizeScores(ranked) {
+  const max = ranked[0].raw || 1;
+  return ranked.map(p => ({ ...p, pct: Math.round(p.raw / max * 100) }));
+}
+
+// ─────────────────────────────────────────────
+// CLEANSING LOGIC
+// ─────────────────────────────────────────────
+function needsCleansing(answers) {
+  const daily = answers.daily_items || [];
+  if(daily.includes('none') || daily.length === 0) return {needed:false};
+  const triggers = [];
+  if(daily.includes('sunscreen'))  triggers.push('日焼け止め');
+  if(daily.includes('uv_cream'))   triggers.push('UVカット入りクリーム');
+  if(daily.includes('makeup'))     triggers.push('BBクリーム・ファンデーション');
+  if(daily.includes('wax'))        triggers.push('整髪料（前髪への付着）');
+  return triggers.length > 0 ? {needed:true, triggers} : {needed:false};
+}
+
+// ─────────────────────────────────────────────
+// ROUTINE BUILDER
+// ─────────────────────────────────────────────
+function buildRoutine(answers, patternId) {
+  const isOily    = answers.afterwash?.includes('oily');
+  const isDry     = answers.afterwash?.includes('dry');
+  const isCombo   = answers.afterwash?.includes('combo');
+  const isBeginner= answers.experience?.includes('beginner');
+  const isPremium = ['high','premium'].includes((answers.budget||['mid'])[0]);
+  const isAging   = ['aging','combo_aging'].includes(patternId);
+  const isStressed= patternId === 'stressed';
+  const trouble   = answers.trouble || [];
+  const cleans    = needsCleansing(answers);
+
+  const am = [];
+  am.push({
+    name:'洗顔',
+    note: isOily
+      ? 'アミノ酸系泡洗顔・ぬるま湯で30秒、すすぎはしっかり丁寧に'
+      : isDry
+      ? '低刺激フォーム・皮脂を取りすぎない。洗いすぎNG'
+      : 'ノンアルコール・弱酸性タイプで優しく',
+    highlight:false
+  });
+
+  if(!isBeginner) {
+    am.push({
+      name:'化粧水（保湿）',
+      note: isDry
+        ? 'セラミド・ヒアルロン酸配合を選ぶ。ハンドプレスで浸透させる'
+        : 'ノンアルコール・軽めのテクスチャーで素早く浸透',
+      highlight:false
+    });
+  }
+
+  if(!isBeginner) {
+    am.push({
+      name: isOily ? 'ジェル保湿（乳液代わり）' : '乳液 or 保湿クリーム',
+      note: isOily
+        ? '油分を補いすぎないジェルタイプで水分を閉じ込める'
+        : isDry
+        ? 'しっかり蓋をするクリームタイプで水分をロック'
+        : '水分と油分のバランスを整えるエマルジョンタイプ',
+      highlight:false
+    });
+  }
+
+  am.push({
+    name:'日焼け止め',
+    note:'SPF30以上・PA+++以上。曇りの日も必須。朝のルーティン最終ステップとして毎日定着させる',
+    highlight:true
+  });
+
+  const pm = [];
+  if(cleans.needed) {
+    pm.push({
+      name:'クレンジング（先行）',
+      note:'ミルクまたはジェルタイプを推奨。ダブル洗顔不要タイプが肌への負担が少ない',
+      highlight:true
+    });
+  }
+
+  pm.push({
+    name:'洗顔（夜用）',
+    note: isOily
+      ? 'しっかり泡立てて毛穴の汚れを除去。週1〜2でクレイ洗顔も効果的'
+      : isDry
+      ? '洗いすぎに注意。弱酸性洗顔料でバリア機能を守る'
+      : '優しく丁寧に。肌の状態を見ながら洗浄力を調整',
+    highlight:false
+  });
+
+  if(isPremium || isAging) {
+    const serumNote = trouble.includes('acne')
+      ? 'BHA系・抗炎症成分で毛穴とニキビを同時ケア'
+      : trouble.includes('dull') || patternId === 'outdoor_uv'
+      ? 'ビタミンC誘導体・ナイアシンアミドでくすみ・色素沈着を対策'
+      : isAging
+      ? 'レチノール・ペプチド系でターンオーバーを促進。初めは週2〜3回から'
+      : isStressed
+      ? 'アズレン・パンテノール配合の鎮静美容液で炎症を抑える'
+      : 'ナイアシンアミド配合で毛穴・くすみを総合対策';
+    pm.push({name:'美容液（ブースター）', note:serumNote, highlight:false});
+  }
+
+  pm.push({
+    name:'化粧水',
+    note:'朝より丁寧に重ねて。週2〜3回コットンパックを取り入れると浸透力UP',
+    highlight:false
+  });
+
+  pm.push({
+    name:'保湿クリーム',
+    note: isDry
+      ? '高保湿クリームまたはワセリンをブレンドして就寝。肌のゴールデンタイムを活かす'
+      : isOily
+      ? '軽めのジェルクリームで油分過多にならないよう調整'
+      : '水分と油分のバランスを整えるナイトクリーム',
+    highlight:false
+  });
+
+  return {am, pm, cleans};
+}
+
+// ─────────────────────────────────────────────
+// INGREDIENT BUILDER
+// ─────────────────────────────────────────────
+function buildIngredients(answers, patternId) {
+  const trouble = answers.trouble || [];
+  const items = [];
+  const add = (name, key) => { if(!items.find(i=>i.name===name)) items.push({name,key}); };
+
+  if(['oily_acne','stressed'].includes(patternId) || trouble.includes('acne')) {
+    add('ナイアシンアミド', true); add('BHA（サリチル酸）', true);
+    add('ティーツリー', false); add('アゼライン酸', false);
+  }
+  if(['dry_sensitive'].includes(patternId) || trouble.includes('dry_c')) {
+    add('セラミド', true); add('ヒアルロン酸', true);
+    add('スクワラン', false); add('シアバター', false);
+  }
+  if(['glow','outdoor_uv'].includes(patternId) || trouble.includes('dull')) {
+    add('ビタミンC誘導体', true); add('トラネキサム酸', false);
+    add('アルブチン', false);
+  }
+  if(['aging','combo_aging'].includes(patternId) || trouble.includes('aging')) {
+    add('レチノール', true); add('ペプチド', true);
+    add('コエンザイムQ10', false);
+  }
+  if(trouble.includes('pore') || patternId === 'combo') {
+    add('AHA（グリコール酸）', true); add('クレイ（高嶺土）', false);
+  }
+  if(patternId === 'stressed') {
+    add('アズレン', true); add('パンテノール', true); add('アラントイン', false);
+  }
+  add('SPF/PA++', true);
+  add('ヒアルロン酸', false);
+  add('グリセリン', false);
+  return items;
+}
+
+// ─────────────────────────────────────────────
+// ADVICE BUILDER
+// ─────────────────────────────────────────────
+function buildAdvice(answers, patternId) {
+  const trouble  = answers.trouble  || [];
+  const life     = answers.lifestyle|| [];
+  const isBeginner = answers.experience?.includes('beginner');
+  const shave    = (answers.shaving||['electric'])[0];
+  const daily    = answers.daily_items || [];
+
+  const advice = [];
+
+  // Advice 1: pattern-specific
+  const p1map = {
+    oily_acne: {
+      title:'「洗いすぎ」が皮脂過剰を引き起こしている可能性あり',
+      text:'脂性肌の人ほど洗顔しすぎてしまいがち。洗い過ぎると肌が乾燥を補おうとして逆に皮脂を過剰分泌します。1日2回・ぬるま湯・アミノ酸系を守るだけで大きく改善します。'
+    },
+    dry_sensitive: {
+      title:'バリア機能の回復が最初の一手',
+      text:'乾燥・敏感肌は皮膚のバリア機能が低下しているサイン。セラミド配合の保湿剤を夜に重点的に使い、2〜4週間かけてバリアを立て直してから他のケアを足していきましょう。'
+    },
+    combo: {
+      title:'Tゾーンと頬で別々のアプローチを',
+      text:'混合肌は「全顔同じケア」が一番NG。Tゾーン（額・鼻）は軽めのジェル保湿、頬はしっかりクリームと部位で使い分けるのが最短ルートです。'
+    },
+    aging: {
+      title:'レチノールは少量・夜のみ・週2〜3回から',
+      text:'エイジングの切り札・レチノールは強い成分です。最初は豆粒大を週2〜3回夜のみ使用し、刺激がなければ徐々に頻度を上げましょう。日中は必ず日焼け止めを。'
+    },
+    glow: {
+      title:'角質ケアを週1〜2回のルーティンに',
+      text:'くすみの主原因は古い角質の蓄積。AHA（グリコール酸）またはBHA（サリチル酸）配合のトナーを週1〜2回使うと、透明感が目に見えて変わります。'
+    },
+    stressed: {
+      title:'スキンケアより「睡眠の質」が先決',
+      text:'ストレスや不規則な生活が続くと、どんなに良いケアをしても肌は回復しません。就寝前のスキンケアを「ルーティン化」することで睡眠の質と肌状態を同時に改善できます。'
+    },
+    outdoor_uv: {
+      title:'日焼け止めは今日から毎朝必須に',
+      text:'紫外線は曇りの日でも約80%透過します。蓄積したUVダメージは美白成分で回復しつつ、今後のダメージを防ぐためにSPF30以上を毎朝塗ることが最優先です。'
+    },
+    combo_aging: {
+      title:'軽めのテクスチャーでエイジングケアを',
+      text:'混合肌のエイジングケアは「重いクリームでしっかり保湿」がNGなことも。ナイアシンアミド＋ペプチド配合の軽めの美容液で毛穴対策とエイジングを同時に狙うのが最効率です。'
+    },
+    beginner: {
+      title:'最初の2週間は「洗顔＋日焼け止め」だけでOK',
+      text:'完璧なルーティンより「継続」が最優先。まず洗顔と日焼け止めを毎日続けて変化を実感してから、2週間後に化粧水を追加。焦らずステップアップが長続きの秘訣です。'
+    },
+    balanced: {
+      title:'現状維持と季節対応が鍵',
+      text:'バランスが取れた肌は大きな変化を加えすぎないことが重要。ただし季節の変わり目（特に春→夏、秋→冬）は肌の調子が変わりやすいので、保湿量を柔軟に調整しましょう。'
+    },
+  };
+  advice.push(p1map[patternId] || p1map.balanced);
+
+  // Advice 2: shaving or lifestyle
+  if(shave === 'razor_daily') {
+    advice.push({
+      title:'剃り後の炎症ケアを必ず習慣化',
+      text:'カミソリは皮膚への物理的ダメージが大きく、肌荒れ・ニキビ・色素沈着の原因になります。剃り後すぐにアズレン・アラントイン配合のアフターシェーブジェルで鎮静させることで肌の負担を大幅に軽減できます。'
+    });
+  } else if(life.includes('irregular') || life.includes('smoking') || life.includes('alcohol')) {
+    advice.push({
+      title:'インナーケアがスキンケアの効果を左右する',
+      text:'睡眠不足・喫煙・過度な飲酒はスキンケアの効果を半減させます。特に睡眠は肌の修復が行われるゴールデンタイム。外からのケアと同時に生活リズムの改善が最も費用対効果の高い投資です。'
+    });
+  } else {
+    advice.push({
+      title:'UVケアは年中・天候問わず継続する',
+      text:'「今日は曇りだから不要」は最もやりがちなミス。紫外線は季節問わず降り注ぎ、くすみ・シミ・シワの最大要因です。SPF30以上を毎朝塗るだけで、5年後・10年後の肌が大きく変わります。'
+    });
+  }
+
+  // Advice 3: cleansing or ingredient
+  const cleans = needsCleansing(answers);
+  if(cleans.needed) {
+    advice.push({
+      title:`${cleans.triggers.join('・')}を使う日はクレンジングが必須`,
+      text:'日焼け止めや整髪料は通常の洗顔だけでは落ちきらず、毛穴に残留して酸化・炎症の原因になります。ミルクまたはジェルクレンジングでやさしくオフしてから洗顔してください。ダブル洗顔不要タイプがおすすめです。'
+    });
+  } else {
+    advice.push({
+      title:'一度に全部変えない。2週間ごとに1アイテム試す',
+      text:'スキンケアを大幅に変えると何が効いているか分からなくなります。新しいアイテムは1つずつ2週間試して、肌の反応を確認してから次へ。自分の肌の「取扱説明書」を作るイメージで進めましょう。'
+    });
+  }
+
+  return advice;
+}
+
+// ─────────────────────────────────────────────
+// SKIN SCORES (radar-style values)
+// ─────────────────────────────────────────────
+function buildSkinScores(answers, patternId) {
+  const isOily = answers.afterwash?.includes('oily');
+  const isDry  = answers.afterwash?.includes('dry');
+  const life   = answers.lifestyle || [];
+  const daily  = answers.daily_items || [];
+  return [
+    {
+      label:'Moisture',
+      val: isDry ? 25 : isOily ? 55 : 72,
+      note: isDry ? 'Low' : isOily ? 'Mid' : 'Good'
+    },
+    {
+      label:'Sebum',
+      val: isOily ? 88 : answers.afterwash?.includes('combo') ? 60 : 32,
+      note: isOily ? 'High' : answers.afterwash?.includes('combo') ? 'Mid' : 'Low'
+    },
+    {
+      label:'Sensitivity',
+      val: answers.trouble?.includes('sensitive') ? 82 :
+           life.includes('irregular') || life.includes('smoking') ? 65 :
+           isDry ? 60 : 35,
+      note: answers.trouble?.includes('sensitive') ? 'High' : 'Normal'
+    },
+    {
+      label:'UV Risk',
+      val: (daily.includes('none') && life.includes('outdoor')) ? 90 :
+           life.includes('outdoor') ? 70 :
+           daily.includes('sunscreen') || daily.includes('uv_cream') ? 20 : 55,
+      note: daily.includes('sunscreen') || daily.includes('uv_cream') ? 'Managed' : 'Risk'
+    },
+  ];
+}
+
+// ─────────────────────────────────────────────
+// CTA BUILDER
+// ─────────────────────────────────────────────
+function buildCtas(answers) {
+  const budget = (answers.budget || ['mid'])[0];
+  if(budget === 'low') return [
+    {cls:'cta-primary',   icon:'🏷️', title:'コスパ最強セットを見る', desc:'3,000円以内で揃う厳選アイテム', url:'#affiliate-cospa'},
+    {cls:'cta-secondary', icon:'📖', title:'初心者向け完全ガイド',   desc:'今日から始める男のスキンケア', url:'#affiliate-guide'},
+  ];
+  if(budget === 'premium') return [
+    {cls:'cta-primary',   icon:'💎', title:'プレミアムラインを見る',   desc:'成分・処方にこだわった本格ケア', url:'#affiliate-premium'},
+    {cls:'cta-secondary', icon:'🧴', title:'メンズ専門サロンに相談', desc:'プロによる肌分析と施術',         url:'#affiliate-salon'},
+  ];
+  return [
+    {cls:'cta-primary',   icon:'🧴', title:'あなたに合う商品を見る',   desc:'診断結果に基づいた厳選アイテム', url:'#affiliate-main'},
+    {cls:'cta-secondary', icon:'📦', title:'トライアルセットを試す', desc:'まず試してから決める安心プラン', url:'#affiliate-trial'},
+  ];
+}
+
+// ─────────────────────────────────────────────
+// PRODUCT SETS (affiliate links — swap # for real URLs after ASP registration)
+// ─────────────────────────────────────────────
+const PRODUCT_SETS = {
+  oily_acne: [
+    { cat:'洗顔料', name:'メンズビオレ 泡スタイル洗顔 さっぱり', price:'¥600前後', point:'皮脂をしっかり除去。アミノ酸系で洗いすぎない', url:'#' },
+    { cat:'化粧水', name:'ルシード 薬用 トータルケア化粧水', price:'¥1,000前後', point:'さっぱりタイプ・皮脂コントロール成分配合', url:'#' },
+    { cat:'ニキビケア', name:'ペアアクネクリームW', price:'¥700前後', point:'薬用ニキビ治療薬（市販）。炎症・ニキビ跡に直接ケア', url:'#' },
+    { cat:'保湿', name:'ニベア メン さっぱりジェル', price:'¥700前後', point:'油分少なめで毛穴詰まりを防ぎながら水分補給', url:'#' },
+  ],
+  dry_sensitive: [
+    { cat:'洗顔料', name:'キュレル 泡洗顔', price:'¥1,200前後', point:'敏感肌向け低刺激処方。セラミド機能成分で洗いながら保護', url:'#' },
+    { cat:'化粧水', name:'キュレル 潤浸保湿化粧水', price:'¥1,500前後', point:'セラミド配合・刺激が少なく敏感肌でも安心', url:'#' },
+    { cat:'保湿', name:'キュレル 保湿クリーム', price:'¥1,200前後', point:'敏感肌の定番。バリア機能をしっかり整える', url:'#' },
+    { cat:'ブースター', name:'ミノン アミノモイスト モイストチャージ ローション', price:'¥1,800前後', point:'皮膚科推奨レベルの低刺激。特に乾燥がひどい日に', url:'#' },
+  ],
+  combo: [
+    { cat:'洗顔料', name:'バルクオム THE FACE WASH', price:'¥2,000前後', point:'洗いすぎず・残らず。混合肌のバランスを整える', url:'#' },
+    { cat:'化粧水', name:'ルシード オイルコントロール化粧水', price:'¥1,000前後', point:'皮脂と乾燥のバランスを同時に調整', url:'#' },
+    { cat:'乳液', name:'キュレル 皮脂トラブルケア 乳液', price:'¥1,500前後', point:'混合肌に特化した処方。Tゾーン・頬の両方に対応', url:'#' },
+  ],
+  aging: [
+    { cat:'洗顔料', name:'バルクオム THE FACE WASH', price:'¥2,000前後', point:'しっとり洗い上がり。年齢肌に優しいアミノ酸系', url:'#' },
+    { cat:'化粧水', name:'ルシード 薬用 スキンフルード', price:'¥1,500前後', point:'エイジングケア成分配合。ハリ・ツヤを取り戻す', url:'#' },
+    { cat:'乳液', name:'バルクオム THE LOTION', price:'¥3,000前後', point:'高浸透処方。アクティブ成分が肌の奥まで届く', url:'#' },
+    { cat:'エイジングケア', name:'ニベア メン アクティブエイジ', price:'¥800前後', point:'手頃なエイジングケア。まず試したい方に最適', url:'#' },
+  ],
+  glow: [
+    { cat:'洗顔料', name:'メンズビオレ 泡スタイル洗顔 さっぱり', price:'¥600前後', point:'古い角質・くすみの原因をしっかりオフ', url:'#' },
+    { cat:'化粧水', name:'肌ラボ 白潤プレミアム 薬用浸透美白化粧水', price:'¥1,000前後', point:'トラネキサム酸配合・くすみ・色ムラにアプローチ', url:'#' },
+    { cat:'保湿', name:'ニベア メン クリームケア 保湿ジェル', price:'¥700前後', point:'ベタつかないジェルで清潔感のある仕上がりに', url:'#' },
+  ],
+  stressed: [
+    { cat:'洗顔料', name:'キュレル 泡洗顔', price:'¥1,200前後', point:'刺激を最小限に。荒れた肌をいたわりながら洗浄', url:'#' },
+    { cat:'化粧水', name:'キュレル 潤浸保湿化粧水', price:'¥1,500前後', point:'セラミドでバリアを補修。ストレスダメージを回復', url:'#' },
+    { cat:'保湿', name:'ミノン アミノモイスト モイストチャージ ローション', price:'¥1,800前後', point:'アミノ酸系低刺激処方。敏感・ストレス肌の鎮静に', url:'#' },
+  ],
+  outdoor_uv: [
+    { cat:'洗顔料', name:'メンズビオレ 泡スタイル洗顔 さっぱり', price:'¥600前後', point:'蓄積したUV汚れ・外的ダメージをしっかり除去', url:'#' },
+    { cat:'化粧水', name:'肌ラボ 白潤プレミアム 薬用浸透美白化粧水', price:'¥1,000前後', point:'紫外線によるくすみ・シミをトラネキサム酸でケア', url:'#' },
+    { cat:'保湿', name:'ニベア メン クリームケア 保湿ジェル', price:'¥700前後', point:'UVダメージで失われた水分を補給。さっぱり仕上がり', url:'#' },
+  ],
+  combo_aging: [
+    { cat:'洗顔料', name:'バルクオム THE FACE WASH', price:'¥2,000前後', point:'年齢混合肌のデリケートなバランスを保つ洗顔', url:'#' },
+    { cat:'化粧水', name:'ルシード 薬用 スキンフルード', price:'¥1,500前後', point:'エイジングケア成分配合。皮脂コントロールもサポート', url:'#' },
+    { cat:'乳液', name:'キュレル 皮脂トラブルケア 乳液', price:'¥1,500前後', point:'混合肌の皮脂バランスを整えながらエイジングケアも', url:'#' },
+  ],
+  beginner: [
+    { cat:'洗顔料', name:'肌ラボ 極潤 洗顔フォーム', price:'¥800前後', point:'コスパ◎ 低刺激で初心者でも使いやすい定番洗顔', url:'#' },
+    { cat:'化粧水', name:'肌ラボ 極潤 ヒアルロン液', price:'¥1,000前後', point:'コスパ最強のヒアルロン酸化粧水。保湿の基礎が整う', url:'#' },
+    { cat:'保湿', name:'ニベア メン クリームケア 保湿ジェル', price:'¥700前後', point:'ベタつかず毎日続けやすい。初心者の1本目に最適', url:'#' },
+  ],
+  balanced: [
+    { cat:'洗顔料', name:'バルクオム THE FACE WASH', price:'¥2,000前後', point:'バランス肌に最適。適切な洗浄力で肌を整える', url:'#' },
+    { cat:'化粧水', name:'肌ラボ 極潤 ヒアルロン液', price:'¥1,000前後', point:'コスパ◎ ヒアルロン酸配合で安定した保湿を維持', url:'#' },
+    { cat:'保湿', name:'ニベア メン クリームケア 保湿ジェル', price:'¥700前後', point:'バランス肌をキープする軽めの保湿ジェル', url:'#' },
+  ],
+};
+
+function buildProducts(patternId) {
+  return PRODUCT_SETS[patternId] || PRODUCT_SETS.balanced;
+}
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let currentQ = 0;
+const answers = {};
+
+// ─────────────────────────────────────────────
+// RENDER QUESTION
+// ─────────────────────────────────────────────
+function renderQ() {
+  const q = QUESTIONS[currentQ];
+  const total = QUESTIONS.length;
+
+  document.getElementById('q-step').textContent = 'Q' + (currentQ+1);
+  document.getElementById('q-category').textContent = q.category;
+  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('q-hint').textContent = q.hint || '';
+  document.getElementById('progress-frac').textContent = (currentQ+1) + ' / ' + total;
+  document.getElementById('progress-fill').style.width = (currentQ / total * 100) + '%';
+  document.getElementById('btn-back').style.visibility = currentQ === 0 ? 'hidden' : 'visible';
+
+  const sel = answers[q.id] || [];
+  const wrap = document.getElementById('options-wrap');
+  wrap.innerHTML = '';
+
+  q.options.forEach(opt => {
+    const isSelected = sel.includes(opt.value);
+    const btn = document.createElement('button');
+    btn.className = 'opt' + (isSelected ? ' selected' : '');
+    btn.dataset.value = opt.value;
+    btn.innerHTML = `
+      <span class="opt-check">
+        <svg class="opt-check-mark" viewBox="0 0 12 12" fill="none">
+          <path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="opt-body">
+        <span class="opt-text">${opt.text}</span>
+        ${opt.sub ? `<span class="opt-sub">${opt.sub}</span>` : ''}
+      </span>`;
+    btn.onclick = () => toggleOpt(q, opt, btn);
+    wrap.appendChild(btn);
+  });
+
+  updateNextBtn(q);
+  const qs = document.getElementById('quiz-screen');
+  qs.style.animation = 'none';
+  void qs.offsetWidth;
+  qs.style.animation = 'fadeup 0.35s ease';
+}
+
+function toggleOpt(q, opt, btn) {
+  if(!answers[q.id]) answers[q.id] = [];
+  const vals = answers[q.id];
+
+  if(q.multi) {
+    if(opt.exclusive) {
+      answers[q.id] = vals.includes(opt.value) ? [] : [opt.value];
+    } else {
+      answers[q.id] = vals.filter(v => !q.options.find(o => o.value===v && o.exclusive));
+      if(vals.includes(opt.value)) answers[q.id] = answers[q.id].filter(v => v !== opt.value);
+      else answers[q.id].push(opt.value);
+    }
+  } else {
+    answers[q.id] = [opt.value];
+  }
+
+  document.querySelectorAll('.opt').forEach(b => {
+    b.classList.toggle('selected', answers[q.id].includes(b.dataset.value));
+  });
+  updateNextBtn(q);
+}
+
+function updateNextBtn(q) {
+  document.getElementById('btn-next').disabled = !(answers[q.id]?.length > 0);
+}
+
+function nextQ() {
+  if(!(answers[QUESTIONS[currentQ].id]?.length > 0)) return;
+  if(currentQ < QUESTIONS.length - 1) { currentQ++; renderQ(); }
+  else showLoading();
+}
+
+function prevQ() {
+  if(currentQ > 0) { currentQ--; renderQ(); }
+}
+
+// ─────────────────────────────────────────────
+// LOADING
+// ─────────────────────────────────────────────
+const LOAD_PHASES = [
+  'Analyzing skin type','Processing lifestyle data',
+  'Running pattern scoring','Matching your profile',
+  'Calculating cleansing needs','Building your routine',
+  'Selecting key ingredients','Generating your report',
+];
+
+function showLoading() {
+  document.getElementById('quiz-screen').style.display = 'none';
+  document.getElementById('loading-screen').style.display = 'block';
+  let pi = 0;
+  const phaseEl = document.getElementById('loading-phase');
+  const iv = setInterval(() => {
+    phaseEl.style.opacity = 0;
+    setTimeout(() => { phaseEl.textContent = LOAD_PHASES[pi % LOAD_PHASES.length]; phaseEl.style.opacity = 1; pi++; }, 150);
+  }, 550);
+  setTimeout(() => { clearInterval(iv); showResult(); }, 4400);
+}
+
+// ─────────────────────────────────────────────
+// RENDER RESULT
+// ─────────────────────────────────────────────
+function showResult() {
+  // Convert answer arrays to plain values where needed
+  const a = {};
+  Object.keys(answers).forEach(k => {
+    const q = QUESTIONS.find(q => q.id === k);
+    a[k] = q?.multi ? answers[k] : answers[k];
+  });
+
+  const ranked = normalizeScores(rankPatterns(a));
+  const top = ranked[0];
+  const routine = buildRoutine(a, top.id);
+  const ingredients = buildIngredients(a, top.id);
+  const advice = buildAdvice(a, top.id);
+  const skinScores = buildSkinScores(a, top.id);
+  const ctas = buildCtas(a);
+  const top5 = ranked.slice(0,5);
+
+  const el = document.getElementById('result-screen');
+  el.innerHTML = `
+    <div class="result-section">
+      <div class="result-hero">
+        <div class="result-eyebrow">診断完了 — Your Skin Type</div>
+        <span class="pattern-badge" style="border-color:${top.badge.color};color:${top.badge.color};background:${top.badge.bg};">${top.badge.label}</span>
+        <div class="result-type">${top.name}</div>
+        <div class="result-type-ja">${top.ja}</div>
+        <p class="result-tagline">${top.tagline}</p>
+        <div class="score-grid">
+          ${skinScores.map(s=>`
+            <div class="score-item">
+              <div class="score-meta">
+                <span class="score-label">${s.label}</span>
+                <span class="score-val">${s.note}</span>
+              </div>
+              <div class="score-track"><div class="score-bar" data-val="${s.val}"></div></div>
+            </div>`).join('')}
+        </div>
+        <div class="share-row">
+          <a id="share-x" class="share-btn" href="#" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            Xでシェア
+          </a>
+          <button class="share-btn" id="copy-btn" onclick="copyResult('${top.name}','${top.ja}')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            コピー
+          </button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">パターンマッチ度（スコアリング結果）</div>
+        <div class="match-grid">
+          ${top5.map((p,i)=>`
+            <div class="match-item${i===0?' top':''}">
+              <span class="match-name">${p.ja}</span>
+              <div class="match-bar-wrap"><div class="match-bar" style="background:${p.badge.color};width:0%" data-val="${p.pct}"></div></div>
+              <span class="match-pct">${p.pct}%</span>
+            </div>`).join('')}
+        </div>
+        <p style="font-size:0.7rem;color:var(--muted);margin-top:0.8rem;">スコアが高いほどあなたの回答との一致度が高いパターンです（最上位が診断結果）</p>
+      </div>
+    </div>
+
+    <div class="result-section">
+      <div class="panel">
+        <div class="panel-title">デイリールーティン</div>
+        ${routine.cleans.needed ? `
+          <div class="cleansing-notice">
+            <div class="cleansing-icon">💧</div>
+            <div>
+              <div class="cleansing-title">クレンジングを推奨します</div>
+              <div class="cleansing-text">${routine.cleans.triggers.join('・')}を使用しているため、夜の洗顔前にクレンジングが必要です。通常の洗顔だけでは落ちきらず、毛穴詰まり・酸化汚れの原因になります。</div>
+            </div>
+          </div>` : ''}
+        <div class="routine-cols">
+          <div>
+            <div class="routine-col-label">AM Morning</div>
+            <div class="routine-steps">
+              ${routine.am.map((s,i)=>`
+                <div class="routine-step${s.highlight?' highlight':''}">
+                  <span class="step-num">0${i+1}</span>
+                  <div><div class="step-name">${s.name}</div><div class="step-note">${s.note}</div></div>
+                </div>`).join('')}
+            </div>
+          </div>
+          <div>
+            <div class="routine-col-label pm">PM Evening</div>
+            <div class="routine-steps">
+              ${routine.pm.map((s,i)=>`
+                <div class="routine-step${s.highlight?' highlight':''}">
+                  <span class="step-num">0${i+1}</span>
+                  <div><div class="step-name">${s.name}</div><div class="step-note">${s.note}</div></div>
+                </div>`).join('')}
+            </div>
+          </div>
+        </div>
+        <p style="font-size:0.7rem;color:var(--muted);margin-top:0.8rem;">💡 青枠ハイライト = あなたの肌に特に重要なステップ</p>
+      </div>
+    </div>
+
+    <div class="result-section">
+      <div class="panel">
+        <div class="panel-title">注目すべき成分</div>
+        <div class="ingredient-wrap">
+          ${ingredients.map(ing=>`<span class="ing-tag${ing.key?' key':''}">${ing.name}</span>`).join('')}
+        </div>
+        <p style="font-size:0.7rem;color:var(--muted);margin-top:0.8rem;">青ハイライト = あなたの肌課題に特に有効な成分</p>
+      </div>
+    </div>
+
+    <div class="result-section">
+      <div class="panel">
+        <div class="panel-title">パーソナライズドアドバイス</div>
+        <div class="advice-list">
+          ${advice.map((adv,i)=>`
+            <div class="advice-item">
+              <div class="advice-num">${i+1}</div>
+              <div>
+                <div class="advice-title">${adv.title}</div>
+                <div class="advice-text">${adv.text}</div>
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <div class="result-section">
+      <div class="panel">
+        <div class="panel-title">あなたへのおすすめ商品</div>
+        <div class="product-grid">
+          ${buildProducts(top.id).map(p=>`
+            <a href="${p.url}" class="product-card" target="_blank" rel="noopener sponsored">
+              <div class="product-cat">${p.cat}</div>
+              <div class="product-body">
+                <div class="product-name">${p.name}</div>
+                <div class="product-price">${p.price}</div>
+                <div class="product-point">${p.point}</div>
+              </div>
+              <div class="product-arr">→</div>
+            </a>`).join('')}
+        </div>
+        <p class="product-notice">※ リンク先はアフィリエイト広告を含みます。診断結果に基づく推奨ですが、肌の状態には個人差があります。購入前に成分・使用上の注意をご確認ください。</p>
+      </div>
+    </div>
+
+    <div class="result-section">
+      <div class="panel">
+        <div class="panel-title">Next Step</div>
+        <div class="cta-grid">
+          ${ctas.map(c=>`
+            <a href="${c.url}" class="cta-btn ${c.cls}">
+              <div class="cta-icon">${c.icon}</div>
+              <div class="cta-body">
+                <div class="cta-title-text">${c.title}</div>
+                <div class="cta-desc-text">${c.desc}</div>
+              </div>
+              <div class="cta-arr">→</div>
+            </a>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <button class="retake-btn" onclick="retake()">← もう一度診断する</button>
+  `;
+
+  document.getElementById('loading-screen').style.display = 'none';
+  el.style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+
+  setTimeout(() => {
+    el.querySelectorAll('.score-bar').forEach(b => b.style.width = b.dataset.val + '%');
+    el.querySelectorAll('.match-bar').forEach(b => b.style.width = b.dataset.val + '%');
+  }, 300);
+
+  const shareText = `【SKINCODE診断】私の肌タイプ → ${top.name}（${top.ja}）\n${top.tagline.slice(0,40)}…\n`;
+  const xBtn = el.querySelector('#share-x');
+  if(xBtn) xBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(location.href)}`;
+}
+
+function copyResult(name, ja) {
+  navigator.clipboard.writeText(`【SKINCODE診断】肌タイプ：${name}（${ja}）\n${location.href}`).then(() => {
+    const btn = document.getElementById('copy-btn');
+    if(btn) { btn.textContent = '✓ コピー完了'; setTimeout(() => { btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> コピー'; }, 2000); }
+  });
+}
+
+function retake() {
+  currentQ = 0;
+  Object.keys(answers).forEach(k => delete answers[k]);
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('result-screen').innerHTML = '';
+  document.getElementById('quiz-screen').style.display = 'block';
+  renderQ();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+renderQ();
+</script>
+</body>
+</html>
