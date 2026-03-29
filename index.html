@@ -389,6 +389,11 @@
   .clinic-cta-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.7; }
   .clinic-cta-arr { color: var(--blue); font-size: 1rem; flex-shrink: 0; align-self: center; }
   .clinic-cta-notice { font-size: 0.65rem; color: var(--muted2); margin-top: 0.6rem; }
+
+  /* PR disclosure */
+  .pr-notice { display: flex; align-items: center; gap: 0.6rem; padding: 0.65rem 1rem; background: var(--warn-bg); border: 1px solid rgba(208,128,48,0.25); border-radius: 8px; margin-bottom: 1.2rem; }
+  .pr-badge { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 400; letter-spacing: 0.1em; color: var(--warn); border: 1px solid var(--warn); border-radius: 4px; padding: 1px 6px; flex-shrink: 0; }
+  .pr-text { font-size: 0.72rem; color: var(--warn); line-height: 1.5; }
 </style>
 <!-- Vercel Web Analytics -->
 <script defer src="/_vercel/insights/script.js"></script>
@@ -1256,6 +1261,11 @@ function showResult() {
 
   const el = document.getElementById('result-screen');
   el.innerHTML = `
+    <div class="pr-notice">
+      <span class="pr-badge">PR</span>
+      <span class="pr-text">本ページはアフィリエイト広告（成果報酬型広告）を利用しています。掲載商品・サービスの選定は診断結果に基づいており、広告主からの依頼による掲載順位の操作は行っていません。</span>
+    </div>
+
     <div class="result-section">
       <div class="result-hero">
         <div class="result-eyebrow">診断完了 — Your Skin Type</div>
