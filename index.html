@@ -378,6 +378,17 @@
   /* Ingredient rationale */
   .ingredient-rationale { margin-top: 1rem; padding: 0.9rem 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; }
   .ingredient-rationale p { font-size: 0.78rem; color: var(--text-mid); line-height: 1.9; }
+
+  /* Clinic CTA */
+  .clinic-cta { display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem 1.3rem; background: linear-gradient(135deg, var(--blue-pale) 0%, var(--white) 70%); border: 1px solid var(--border-md); border-radius: 12px; text-decoration: none; transition: all 0.2s; color: inherit; }
+  .clinic-cta:hover { border-color: var(--blue); box-shadow: 0 4px 16px rgba(43,123,224,0.12); transform: translateY(-1px); }
+  .clinic-cta-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+  .clinic-cta-body { flex: 1; }
+  .clinic-cta-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.15em; color: var(--blue); text-transform: uppercase; margin-bottom: 0.35rem; }
+  .clinic-cta-title { font-size: 0.92rem; font-weight: 500; color: var(--navy); margin-bottom: 0.3rem; line-height: 1.4; }
+  .clinic-cta-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.7; }
+  .clinic-cta-arr { color: var(--blue); font-size: 1rem; flex-shrink: 0; align-self: center; }
+  .clinic-cta-notice { font-size: 0.65rem; color: var(--muted2); margin-top: 0.6rem; }
 </style>
 <!-- Vercel Web Analytics -->
 <script defer src="/_vercel/insights/script.js"></script>
@@ -1013,6 +1024,25 @@ function buildSkinScores(answers, patternId) {
 }
 
 // ─────────────────────────────────────────────
+// CLINIC CTA BUILDER
+// ─────────────────────────────────────────────
+const CLINIC_URL = 'https://t.afi-b.com/visit.php?a=58658u-V292891c&p=k844808E';
+const CLINIC_PIXEL = 'https://t.afi-b.com/lead/58658u/k844808E/V292891c';
+
+function buildClinicCta(patternId) {
+  const map = {
+    oily_acne:   { title:'ニキビ・毛穴の悩みを根本から解決したい方へ', desc:'市販ケアで改善しない場合、クリニックの治療が最短ルートです。ケミカルピーリング・ダーマペンなど、ホームケアでは届かない治療で肌を変えられます。', priority: true },
+    aging:       { title:'エイジングケアを本格化したい方へ', desc:'医師による肌診断とメディカルグレードの施術で、ホームケアの限界を超えたアプローチができます。早めの対処が10年後の肌を大きく変えます。', priority: true },
+    glow:        { title:'くすみ・色ムラを根本から改善したい方へ', desc:'美白・透明感ケアは医療機関の施術が最も確実です。トーニングレーザーやビタミンC導入など、市販品では届かない効果が得られます。', priority: true },
+    combo_aging: { title:'混合肌×エイジングを専門家に相談したい方へ', desc:'個人差が大きいタイプのため、医師の肌診断を受けることが最も確実な改善への近道です。', priority: true },
+    dry_sensitive:{ title:'敏感肌・肌荒れが長引いている方へ', desc:'肌の状態が安定しない場合、皮膚科専門医による診断が解決の糸口になることがあります。', priority: false },
+    stressed:    { title:'肌荒れ・ストレス肌が慢性化している方へ', desc:'生活習慣を整えてもなかなか改善しない場合は、専門医への相談も選択肢のひとつです。', priority: false },
+  };
+  const data = map[patternId] || { title:'プロによる肌診断に興味がある方へ', desc:'男性専門の美容皮膚科クリニックで、あなたの肌に合ったケアを相談してみませんか。', priority: false };
+  return data;
+}
+
+// ─────────────────────────────────────────────
 // CTA BUILDER
 // ─────────────────────────────────────────────
 function buildCtas(answers) {
@@ -1374,6 +1404,27 @@ function showResult() {
         </div>
       </div>
     </div>
+
+    ${(() => {
+      const clinic = buildClinicCta(top.id);
+      return `
+    <div class="result-section">
+      <div class="panel">
+        <div class="panel-title">${clinic.priority ? 'クリニック治療という選択肢' : '専門家への相談'}</div>
+        <a href="${CLINIC_URL}" class="clinic-cta" target="_blank" rel="nofollow noopener sponsored">
+          <div class="clinic-cta-icon">${clinic.priority ? '🏥' : '💬'}</div>
+          <div class="clinic-cta-body">
+            <div class="clinic-cta-label">Men's Clinic</div>
+            <div class="clinic-cta-title">${clinic.title}</div>
+            <div class="clinic-cta-desc">${clinic.desc}</div>
+          </div>
+          <div class="clinic-cta-arr">→</div>
+        </a>
+        <p class="clinic-cta-notice">※ アフィリエイト広告を含みます</p>
+        <img src="${CLINIC_PIXEL}" width="1" height="1" style="border:none;display:none;" loading="lazy" alt="">
+      </div>
+    </div>`;
+    })()}
 
     <div style="text-align:center;margin:24px 0 8px;">
       <p style="font-size:12px;color:#888;margin-bottom:8px;">気になる商品は楽天市場でもチェック</p>
