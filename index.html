@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LX9NKNY6H"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-2LX9NKNY6H', { 'site_name': 'SKIN CODE' });
+</script>
 <title>男性スキンケア診断 | 肌タイプ別ルーティンを無料で提案 — SKIN CODE</title>
 <meta name="description" content="9つの質問に答えるだけ。脂性・乾燥・混合肌など10タイプから肌質を診断。40代からのエイジングケア・ニキビ跡・乾燥肌対策まで、男性向けスキンケアルーティンとおすすめ商品を無料で提案。登録不要。">
 <link rel="canonical" href="https://skin-caresite.vercel.app/">
@@ -359,6 +367,16 @@
   .retake-btn { display: block; width: 100%; padding: 0.8rem; text-align: center; font-size: 0.76rem; color: var(--muted); background: var(--white); border: 1px solid var(--border-md); border-radius: 8px; cursor: pointer; transition: all 0.2s; margin-top: 0; }
   .retake-btn:hover { border-color: var(--blue); color: var(--blue); }
 
+  /* Cross banner */
+  .cross-banner { display: flex; align-items: center; gap: 14px; padding: 1.1rem 1.3rem; border: 1.5px solid var(--border-md); border-radius: 12px; background: linear-gradient(135deg, rgba(26,78,128,0.04) 0%, var(--white) 100%); text-decoration: none; transition: all 0.25s; margin-top: 10px; }
+  .cross-banner:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(26,78,128,0.15); }
+  .cross-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .cross-body { flex: 1; }
+  .cross-label { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.14em; color: var(--blue); text-transform: uppercase; margin-bottom: 0.3rem; }
+  .cross-title { font-size: 0.88rem; font-weight: 500; color: var(--navy); margin-bottom: 0.2rem; }
+  .cross-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.5; }
+  .cross-arr { color: var(--muted2); font-size: 1rem; flex-shrink: 0; }
+
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--blue-light); border-radius: 99px; }
@@ -400,6 +418,11 @@
 </head>
 <body>
 <div class="wrap">
+
+  <div class="pr-notice" style="margin-bottom:1.5rem;">
+    <span class="pr-badge">PR</span>
+    <span class="pr-text">本ページにはアフィリエイト広告が含まれます。</span>
+  </div>
 
   <header class="site-header">
     <div class="logo-row">
@@ -615,8 +638,8 @@ const PATTERNS = [
     id:'aging',
     name:'Aging Focus',
     ja:'エイジングケアタイプ',
-    tagline:'ハリやツヤが気になり始めたエイジングケアタイプです。肌が新しく生まれ変わるサイクルを整えてあげるだけで、今の状態を長くキープできます。早めのケアが10年後の差になります。',
-    rationale:'「レチノール」がエイジングケアの最重要成分である理由は、肌のターンオーバー（新陳代謝）を促進し、コラーゲン生成を科学的に証明された方法でサポートするからです。ただし刺激が強いため、最初は週2〜3回・夜のみ少量から始め、日中は必ずSPF30以上の日焼け止めをセットで使う必要があります。「ナイアシンアミド」はハリ・ツヤ改善と毛穴縮小を穏やかに行い、レチノールが肌に慣れるまでの期間にも活用できます。「ペプチド」はコラーゲン生成シグナルを送り、弾力低下への長期的アプローチになります。',
+    tagline:'ハリやツヤが気になり始めたエイジングケアタイプです。肌のターンオーバー（新陳代謝）を整えるケアで、今の状態を長くキープできます。早めのケアが10年後の差になります。',
+    rationale:'「レチノール」がエイジングケアの最重要成分である理由は、肌のターンオーバー（新陳代謝）を促進し、コラーゲン生成をサポートするとされているからです。ただし刺激が強いため、最初は週2〜3回・夜のみ少量から始め、日中は必ずSPF30以上の日焼け止めをセットで使う必要があります。「ナイアシンアミド」はハリ・ツヤ改善と毛穴縮小を穏やかに行い、レチノールが肌に慣れるまでの期間にも活用できます。「ペプチド」はコラーゲン生成シグナルを送り、弾力低下への長期的アプローチになります。',
     badge:{label:'エイジング対策', color:'#d08030', bg:'rgba(208,128,48,0.08)'},
     score(a){
       let s=0;
@@ -667,7 +690,7 @@ const PATTERNS = [
     id:'outdoor_uv',
     name:'Outdoor & UV Damaged',
     ja:'屋外・紫外線ダメージ型',
-    tagline:'屋外にいることが多く、紫外線の影響を受けやすいタイプです。日焼け止めを毎朝塗る習慣をつけるだけで、くすみやシミを大幅に防ぐことができます。',
+    tagline:'屋外にいることが多く、紫外線の影響を受けやすいタイプです。日焼け止めを毎朝塗る習慣をつけるだけで、くすみやシミの予防につながります（個人差あり）。',
     rationale:'UV蓄積ダメージの回復に「トラネキサム酸」が有効な理由は、紫外線がメラノサイト（色素細胞）を刺激するシグナル自体をブロックするからです。「ビタミンC誘導体」はすでに作られたメラニンを還元（薄く）しながら、フリーラジカル（紫外線が作る肌破壊物質）を中和します。しかし最重要は「これ以上ダメージを蓄積しないこと」で、SPF30以上・PA+++以上の日焼け止めを毎朝塗ることが唯一の根本対策です。「ヒアルロン酸」でUVによる乾燥・肌荒れを補修し、日々の回復をサポートします。',
     badge:{label:'UV対策急務', color:'#d08030', bg:'rgba(208,128,48,0.08)'},
     score(a){
@@ -916,7 +939,7 @@ function buildAdvice(answers, patternId) {
   const p1map = {
     oily_acne: {
       title:'「洗いすぎ」がテカりとニキビ跡の原因になっているかもしれません',
-      text:'脂性肌の人ほど、つい何度も洗顔してしまいがちです。でも洗いすぎると肌が「乾いた！」と感じて、逆に油分を大量に出してしまいます。1日2回・ぬるま湯でやさしく洗うだけでテカりが落ち着きます。ニキビ跡（赤み・色素沈着）にはナイアシンアミドやビタミンC誘導体配合の美容液が有効です。'
+      text:'脂性肌の人ほど、つい何度も洗顔してしまいがちです。でも洗いすぎると肌が「乾いた！」と感じて、逆に油分を大量に出してしまいます。1日2回・ぬるま湯でやさしく洗うだけでテカりが落ち着きます。ニキビ跡（赤み・色素沈着）にはナイアシンアミドやビタミンC誘導体配合の美容液が有効とされています（個人差あり）。'
     },
     dry_sensitive: {
       title:'まず肌の「守る力」を取り戻すことが先決',
@@ -928,7 +951,7 @@ function buildAdvice(answers, patternId) {
     },
     aging: {
       title:'エイジングケア成分は「少しずつ」が正解',
-      text:'「レチノール」はエイジングケアの定番成分で、肌が新しく生まれ変わるスピードを上げてくれます。ただし効果が強い分、最初は少量・週2〜3回・夜のみ使用から始めるのが鉄則です。使用中は日焼け止めもセットで忘れずに。'
+      text:'「レチノール」はエイジングケアの定番成分で、肌のターンオーバーをサポートしてくれます。ただし効果が強い分、最初は少量・週2〜3回・夜のみ使用から始めるのが鉄則です。使用中は日焼け止めもセットで忘れずに。'
     },
     glow: {
       title:'くすみの原因は「古い角質の溜まり」です',
@@ -1036,10 +1059,10 @@ const CLINIC_PIXEL = 'https://t.afi-b.com/lead/58658u/k844808E/V292891c';
 
 function buildClinicCta(patternId) {
   const map = {
-    oily_acne:   { title:'ニキビ・毛穴の悩みを根本から解決したい方へ', desc:'市販ケアで改善しない場合、クリニックの治療が最短ルートです。ケミカルピーリング・ダーマペンなど、ホームケアでは届かない治療で肌を変えられます。', priority: true },
+    oily_acne:   { title:'ニキビ・毛穴の悩みを根本から解決したい方へ', desc:'市販ケアで改善しない場合、クリニックでの治療も有効な選択肢です。ケミカルピーリング・ダーマペンなど、ホームケアでは届かない治療で肌を変えられます。', priority: true },
     aging:       { title:'エイジングケアを本格化したい方へ', desc:'医師による肌診断とメディカルグレードの施術で、ホームケアの限界を超えたアプローチができます。早めの対処が10年後の肌を大きく変えます。', priority: true },
-    glow:        { title:'くすみ・色ムラを根本から改善したい方へ', desc:'美白・透明感ケアは医療機関の施術が最も確実です。トーニングレーザーやビタミンC導入など、市販品では届かない効果が得られます。', priority: true },
-    combo_aging: { title:'混合肌×エイジングを専門家に相談したい方へ', desc:'個人差が大きいタイプのため、医師の肌診断を受けることが最も確実な改善への近道です。', priority: true },
+    glow:        { title:'くすみ・色ムラを根本から改善したい方へ', desc:'美白・透明感ケアは医療機関の施術も選択肢のひとつです。トーニングレーザーやビタミンC導入など、市販品では届かない効果が得られます。', priority: true },
+    combo_aging: { title:'混合肌×エイジングを専門家に相談したい方へ', desc:'個人差が大きいタイプのため、医師の肌診断を受けることで、より適切なケアが見つかる可能性があります。', priority: true },
     dry_sensitive:{ title:'敏感肌・肌荒れが長引いている方へ', desc:'肌の状態が安定しない場合、皮膚科専門医による診断が解決の糸口になることがあります。', priority: false },
     stressed:    { title:'肌荒れ・ストレス肌が慢性化している方へ', desc:'生活習慣を整えてもなかなか改善しない場合は、専門医への相談も選択肢のひとつです。', priority: false },
   };
@@ -1053,7 +1076,7 @@ function buildClinicCta(patternId) {
 function buildCtas(answers) {
   const budget = (answers.budget || ['mid'])[0];
   if(budget === 'low') return [
-    {cls:'cta-primary',   icon:'🏷️', title:'コスパ最強セットを見る', desc:'3,000円以内で揃う厳選アイテム', url:'#affiliate-cospa'},
+    {cls:'cta-primary',   icon:'🏷️', title:'コスパ重視セットを見る', desc:'3,000円以内で揃う厳選アイテム', url:'#affiliate-cospa'},
     {cls:'cta-secondary', icon:'📖', title:'初心者向け完全ガイド',   desc:'今日から始める男のスキンケア', url:'#affiliate-guide'},
   ];
   if(budget === 'premium') return [
@@ -1115,7 +1138,7 @@ const PRODUCT_SETS = {
   ],
   beginner: [
     { cat:'洗顔料', name:'肌ラボ 極潤 洗顔フォーム', price:'¥800前後', point:'コスパ◎ 低刺激で初心者でも使いやすい定番洗顔', url:'#' },
-    { cat:'化粧水', name:'肌ラボ 極潤 ヒアルロン液', price:'¥1,000前後', point:'コスパ最強のヒアルロン酸化粧水。保湿の基礎が整う', url:'#' },
+    { cat:'化粧水', name:'肌ラボ 極潤 ヒアルロン液', price:'¥1,000前後', point:'コスパに優れたヒアルロン酸化粧水。保湿の基礎が整う', url:'#' },
     { cat:'保湿', name:'ニベア メン クリームケア 保湿ジェル', price:'¥700前後', point:'ベタつかず毎日続けやすい。初心者の1本目に最適', url:'#' },
     { cat:'オールインワン', name:'バルクオム THE ALL-IN-ONE GEL', price:'¥3,500前後', point:'化粧水・乳液・美容液が1本に。忙しい朝でも時短ケア完結', url:'#' },
   ],
@@ -1209,6 +1232,8 @@ function updateNextBtn(q) {
 
 function nextQ() {
   if(!(answers[QUESTIONS[currentQ].id]?.length > 0)) return;
+  if(currentQ === 0) gtag('event', 'quiz_start', { site: 'SKIN CODE' });
+  gtag('event', 'quiz_progress', { site: 'SKIN CODE', question: currentQ + 1, total: QUESTIONS.length });
   if(currentQ < QUESTIONS.length - 1) { currentQ++; renderQ(); }
   else showLoading();
 }
@@ -1243,6 +1268,7 @@ function showLoading() {
 // RENDER RESULT
 // ─────────────────────────────────────────────
 function showResult() {
+  gtag('event', 'quiz_complete', { site: 'SKIN CODE' });
   // Convert answer arrays to plain values where needed
   const a = {};
   Object.keys(answers).forEach(k => {
@@ -1403,7 +1429,7 @@ function showResult() {
         <div class="panel-title">Next Step</div>
         <div class="cta-grid">
           ${ctas.map(c=>`
-            <a href="${c.url}" class="cta-btn ${c.cls}">
+            <a href="${c.url}" class="cta-btn ${c.cls}" target="_blank" rel="noopener sponsored">
               <div class="cta-icon">${c.icon}</div>
               <div class="cta-body">
                 <div class="cta-title-text">${c.title}</div>
@@ -1443,6 +1469,45 @@ function showResult() {
     </div>
 
     <button class="retake-btn" onclick="retake()">← もう一度診断する</button>
+
+    <div style="margin-top:12px;padding:1rem;background:#f6f8fb;border:1px solid rgba(26,78,128,0.1);border-radius:10px;">
+      <div style="font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.14em;color:#5a7d8a;text-transform:uppercase;margin-bottom:0.6rem;">Reference — 参考情報</div>
+      <div style="font-size:0.7rem;color:#5a7d8a;line-height:1.8;">
+        ※ 本ツールは医療行為・医師による診断ではありません。正確な肌トラブルの診断は皮膚科を受診してください。<br>
+        <a href="https://www.dermatol.or.jp/" target="_blank" rel="noopener" style="color:#1a4e80;">日本皮膚科学会</a> ｜
+        <a href="https://www.caa.go.jp/policies/policy/representation/" target="_blank" rel="noopener" style="color:#1a4e80;">消費者庁 景品表示法</a>
+      </div>
+    </div>
+
+    <a href="https://aga-site.vercel.app/" class="cross-banner" target="_blank" rel="noopener">
+      <span class="cross-icon">💇</span>
+      <span class="cross-body">
+        <span class="cross-label">Another Self-Check</span>
+        <span class="cross-title">AGA CODE — 男性AGA・薄毛セルフチェック</span>
+        <span class="cross-desc">薄毛・抜け毛の悩みを優先順位でスコアリング。髪が気になる方はこちらもチェック。</span>
+      </span>
+      <span class="cross-arr">→</span>
+    </a>
+
+    <a href="https://ed-site-three.vercel.app/" class="cross-banner" target="_blank" rel="noopener">
+      <span class="cross-icon">💊</span>
+      <span class="cross-body">
+        <span class="cross-label">Another Self-Check</span>
+        <span class="cross-title">ED CODE — 男性ED セルフチェック</span>
+        <span class="cross-desc">EDの原因を優先順位でスコアリング。男性の健康が気になる方はこちらもチェック。</span>
+      </span>
+      <span class="cross-arr">→</span>
+    </a>
+
+    <a href="https://smell-site.vercel.app/" class="cross-banner" target="_blank" rel="noopener">
+      <span class="cross-icon">👃</span>
+      <span class="cross-body">
+        <span class="cross-label">Another Self-Check</span>
+        <span class="cross-title">SMELL CODE — 体臭・ワキガ セルフチェック</span>
+        <span class="cross-desc">体臭の原因を優先順位でスコアリング。においの悩みが気になる方はこちらもチェック。</span>
+      </span>
+      <span class="cross-arr">→</span>
+    </a>
   `;
 
   document.getElementById('loading-screen').style.display = 'none';
@@ -1462,6 +1527,7 @@ function showResult() {
 }
 
 function copyResult(name, ja) {
+  gtag('event', 'share', { method: 'copy', site: 'SKIN CODE', content_type: 'result' });
   navigator.clipboard.writeText(`【SKINCODE診断】肌タイプ：${name}（${ja}）\n${location.href}`).then(() => {
     const btn = document.getElementById('copy-btn');
     if(btn) { btn.textContent = '✓ コピー完了'; setTimeout(() => { btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> コピー'; }, 2000); }
@@ -1469,6 +1535,7 @@ function copyResult(name, ja) {
 }
 
 function retake() {
+  gtag('event', 'quiz_retake', { site: 'SKIN CODE' });
   currentQ = 0;
   Object.keys(answers).forEach(k => delete answers[k]);
   document.getElementById('result-screen').style.display = 'none';
