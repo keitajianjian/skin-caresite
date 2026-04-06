@@ -412,6 +412,77 @@ gtag('config', 'G-2LX9NKNY6H', { 'site_name': 'SKIN CODE' });
   .pr-notice { display: flex; align-items: center; gap: 0.6rem; padding: 0.65rem 1rem; background: var(--warn-bg); border: 1px solid rgba(208,128,48,0.25); border-radius: 8px; margin-bottom: 1.2rem; }
   .pr-badge { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 400; letter-spacing: 0.1em; color: var(--warn); border: 1px solid var(--warn); border-radius: 4px; padding: 1px 6px; flex-shrink: 0; }
   .pr-text { font-size: 0.72rem; color: var(--warn); line-height: 1.5; }
+
+  /* ── Screen Transitions ── */
+  .screen-exit { opacity: 0; transform: translateY(-12px); transition: opacity 0.3s ease, transform 0.3s ease; }
+  .screen-enter { animation: screenEnter 0.5s cubic-bezier(0.22,1,0.36,1) forwards; }
+  @keyframes screenEnter { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ── Loading Progress Bar ── */
+  .loading-bar-wrap { width: 200px; height: 5px; background: var(--border); border-radius: 99px; overflow: hidden; margin: 1.5rem auto 1rem; }
+  .loading-bar-fill { height: 100%; background: linear-gradient(90deg, var(--blue-light), var(--blue)); width: 0%; transition: width 0.6s cubic-bezier(0.22,1,0.36,1); border-radius: 99px; }
+  .loading-phase-terminal { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; color: var(--blue); background: var(--blue-pale); border: 1px solid var(--border); padding: 0.35rem 0.9rem; border-radius: 6px; display: inline-block; transition: opacity 0.15s; }
+
+  /* ── Result Dashboard Hero ── */
+  .result-hero-dark { padding: 2.5rem 2rem 2rem; background: linear-gradient(135deg, var(--navy) 0%, #1a3f6f 100%); color: #fff; position: relative; overflow: hidden; }
+  .result-hero-dark::before { content: ''; position: absolute; right: -40px; top: -40px; width: 160px; height: 160px; background: rgba(255,255,255,0.04); border-radius: 50%; filter: blur(30px); }
+  .result-hero-dark .result-eyebrow { color: rgba(255,255,255,0.6); }
+  .result-hero-dark .result-eyebrow::before { background: var(--blue); }
+  .result-hero-dark .result-type { color: #fff; }
+  .result-hero-dark .result-type-ja { color: #8bc9ff; }
+  .result-hero-dark .result-tagline { color: rgba(255,255,255,0.75); border-left: 2px solid var(--blue); padding-left: 0.8rem; }
+  .result-hero-dark .pattern-badge { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); color: #fff; }
+  .result-diag-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; padding: 3px 12px; font-size: 0.6rem; font-family: 'DM Mono', monospace; letter-spacing: 0.15em; color: rgba(255,255,255,0.8); margin-bottom: 1rem; }
+  .result-diag-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse-dot 2s infinite; }
+  @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .result-type-code { font-family: 'DM Mono', monospace; font-size: 0.82rem; color: #8bc9ff; margin-bottom: 0.3rem; }
+
+  /* ── Color-coded Score Bars ── */
+  .score-bar-red { background: linear-gradient(90deg, #fca5a5, #ef4444); }
+  .score-bar-blue { background: linear-gradient(90deg, #93c5fd, #3b82f6); }
+  .score-bar-amber { background: linear-gradient(90deg, #fcd34d, #f59e0b); }
+  .score-bar-green { background: linear-gradient(90deg, #86efac, #22c55e); }
+  .score-val-red { color: #ef4444; }
+  .score-val-blue { color: #3b82f6; }
+  .score-val-amber { color: #f59e0b; }
+  .score-val-green { color: #22c55e; }
+  .score-grid-dash { display: flex; flex-direction: column; gap: 14px; margin-top: 1.5rem; }
+  .score-grid-dash .score-track { height: 5px; background: rgba(255,255,255,0.12); }
+  .score-grid-dash .score-meta .score-label { color: rgba(255,255,255,0.6); }
+
+  /* ── Bento Cards ── */
+  .bento-card { background: var(--white); border: 1px solid var(--border-md); border-radius: 16px; padding: 1.4rem; margin-bottom: 10px; box-shadow: 0 4px 0 0 rgba(14,42,86,0.04); }
+  .bento-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 0.7rem; border-bottom: 1px solid var(--border); }
+  .bento-card-title { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--blue); text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; font-weight: 500; }
+  .bento-card-badge { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; color: var(--muted); background: var(--bg); padding: 2px 8px; border-radius: 4px; }
+
+  /* ── AM/PM Contrast Routine ── */
+  .routine-col-am { background: var(--white); border: 1px solid var(--border-md); border-radius: 12px; padding: 1.1rem; position: relative; overflow: hidden; }
+  .routine-col-am::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #f59e0b; }
+  .routine-col-pm { background: var(--navy); border: 1px solid var(--navy); border-radius: 12px; padding: 1.1rem; position: relative; overflow: hidden; color: #fff; }
+  .routine-col-pm::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #818cf8; }
+  .routine-col-pm .step-name { color: #fff; }
+  .routine-col-pm .step-note { color: rgba(255,255,255,0.6); }
+  .routine-col-pm .step-num { color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
+  .routine-col-pm .routine-step { border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); }
+  .routine-col-pm .routine-step.highlight { border-color: var(--blue); background: rgba(43,123,224,0.15); }
+  .routine-col-pm .routine-col-label { background: rgba(255,255,255,0.15); color: #fff; }
+  .routine-time-icon { font-size: 1.1rem; margin-right: 0.4rem; }
+
+  /* ── Share Grid ── */
+  .share-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 1.2rem 0; }
+  .share-grid-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0.7rem; border-radius: 12px; border: none; cursor: pointer; transition: all 0.2s; text-decoration: none; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; }
+  .share-grid-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .share-grid-btn.share-x { background: #000; color: #fff; }
+  .share-grid-btn.share-line { background: #06C755; color: #fff; }
+  .share-grid-btn.share-copy { background: var(--white); color: var(--navy); border: 1px solid var(--border-md); }
+  .share-grid-btn.share-threads { background: #000; color: #fff; }
+  .share-grid-icon { font-size: 1.1rem; }
+
+  /* ── Retake Dashboard ── */
+  .retake-btn-dash { display: block; width: 100%; padding: 0.9rem; text-align: center; font-family: 'DM Mono', monospace; font-size: 0.76rem; letter-spacing: 0.12em; color: var(--muted); background: var(--white); border: 2px solid var(--border-md); border-radius: 12px; cursor: pointer; transition: all 0.2s; }
+  .retake-btn-dash:hover { border-color: var(--blue); color: var(--blue); }
+  .retake-btn-dash:active { transform: translateY(2px); }
 </style>
 <!-- Vercel Web Analytics -->
 <script defer src="/_vercel/insights/script.js"></script>
@@ -459,8 +530,9 @@ gtag('config', 'G-2LX9NKNY6H', { 'site_name': 'SKIN CODE' });
       <div class="loader-ring"></div>
       <div class="loader-ring"></div>
     </div>
-    <div class="loading-phase" id="loading-phase">Analyzing skin profile</div>
-    <div class="loading-title">診断中...</div>
+    <div class="loading-title">ANALYZING CODE...</div>
+    <div class="loading-bar-wrap"><div class="loading-bar-fill" id="loading-bar"></div></div>
+    <div class="loading-phase-terminal" id="loading-phase">> FETCHING_DERMA_DATA</div>
   </div>
 
   <div id="result-screen"></div>
@@ -1246,22 +1318,47 @@ function prevQ() {
 // LOADING
 // ─────────────────────────────────────────────
 const LOAD_PHASES = [
-  'Analyzing skin type','Processing lifestyle data',
-  'Running pattern scoring','Matching your profile',
-  'Calculating cleansing needs','Building your routine',
-  'Selecting key ingredients','Generating your report',
+  {text:'> ANALYZING_SKIN_TYPE', pct:15},
+  {text:'> PROCESSING_LIFESTYLE_DATA', pct:30},
+  {text:'> RUNNING_PATTERN_SCORING', pct:45},
+  {text:'> MATCHING_YOUR_PROFILE', pct:58},
+  {text:'> CALCULATING_CLEANSING_NEEDS', pct:70},
+  {text:'> BUILDING_ROUTINE_ARRAY', pct:82},
+  {text:'> SELECTING_KEY_INGREDIENTS', pct:92},
+  {text:'> CODE_COMPILED', pct:100},
 ];
 
 function showLoading() {
-  document.getElementById('quiz-screen').style.display = 'none';
-  document.getElementById('loading-screen').style.display = 'block';
-  let pi = 0;
+  const quizEl = document.getElementById('quiz-screen');
+  const loadEl = document.getElementById('loading-screen');
+  const barEl = document.getElementById('loading-bar');
   const phaseEl = document.getElementById('loading-phase');
-  const iv = setInterval(() => {
-    phaseEl.style.opacity = 0;
-    setTimeout(() => { phaseEl.textContent = LOAD_PHASES[pi % LOAD_PHASES.length]; phaseEl.style.opacity = 1; pi++; }, 150);
-  }, 550);
-  setTimeout(() => { clearInterval(iv); showResult(); }, 4400);
+
+  // Fade out quiz
+  quizEl.classList.add('screen-exit');
+  setTimeout(() => {
+    quizEl.style.display = 'none';
+    quizEl.classList.remove('screen-exit');
+    loadEl.style.display = 'block';
+    loadEl.classList.add('screen-enter');
+    barEl.style.width = '0%';
+
+    // Animate phases with progress bar
+    let pi = 0;
+    const iv = setInterval(() => {
+      if(pi >= LOAD_PHASES.length) { clearInterval(iv); return; }
+      phaseEl.style.opacity = 0;
+      const phase = LOAD_PHASES[pi];
+      setTimeout(() => {
+        phaseEl.textContent = phase.text;
+        phaseEl.style.opacity = 1;
+        barEl.style.width = phase.pct + '%';
+      }, 120);
+      pi++;
+    }, 520);
+
+    setTimeout(() => { clearInterval(iv); showResult(); }, 4400);
+  }, 300);
 }
 
 // ─────────────────────────────────────────────
@@ -1285,6 +1382,9 @@ function showResult() {
   const ctas = buildCtas(a);
   const top5 = ranked.slice(0,5);
 
+  // Score color mapping
+  const scoreColors = ['red','blue','amber','green'];
+
   const el = document.getElementById('result-screen');
   el.innerHTML = `
     <div class="pr-notice">
@@ -1293,40 +1393,26 @@ function showResult() {
     </div>
 
     <div class="result-section">
-      <div class="result-hero">
-        <div class="result-eyebrow">診断完了 — Your Skin Type</div>
-        <span class="pattern-badge" style="border-color:${top.badge.color};color:${top.badge.color};background:${top.badge.bg};">${top.badge.label}</span>
+      <div class="result-hero-dark">
+        <div class="result-diag-badge">DIAGNOSIS COMPLETE</div>
+        <div class="result-type-code">TYPE: ${top.id.toUpperCase()}</div>
         <div class="result-type">${top.name}</div>
         <div class="result-type-ja">${top.ja}</div>
         <p class="result-tagline">${top.tagline}</p>
-        <div class="score-grid">
-          ${skinScores.map(s=>`
+        <div class="score-grid-dash">
+          ${skinScores.map((s,i)=>`
             <div class="score-item">
               <div class="score-meta">
                 <span class="score-label">${s.label}</span>
-                <span class="score-val">${s.note}</span>
+                <span class="score-val score-val-${scoreColors[i]}">${s.note} ${s.val}%</span>
               </div>
-              <div class="score-track"><div class="score-bar" data-val="${s.val}"></div></div>
+              <div class="score-track"><div class="score-bar score-bar-${scoreColors[i]}" data-val="${s.val}"></div></div>
             </div>`).join('')}
-        </div>
-        <div class="share-row">
-          <a id="share-x" class="share-btn" href="#" target="_blank" rel="noopener">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            Xでシェア
-          </a>
-          <a id="share-threads" class="share-btn" href="#" target="_blank" rel="noopener">
-            <svg width="12" height="12" viewBox="0 0 192 192" fill="currentColor"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.05l13.124 9.027c5.741-8.704 14.76-10.567 21.996-10.567h.23c8.498.054 14.911 2.519 19.06 7.33 3.01 3.493 5.023 8.32 5.984 14.402a100.497 100.497 0 0 0-24.53-.096c-24.794 1.424-40.743 15.835-39.752 35.83.503 10.108 5.553 18.8 14.218 24.516 7.37 4.883 16.86 7.26 26.725 6.714 13.007-.727 23.23-5.667 30.375-14.676 5.502-6.941 8.96-15.92 10.455-27.217 6.267 3.782 10.901 8.766 13.465 14.834 4.419 10.446 4.678 27.562-9.098 41.264-12.108 12.039-26.676 17.26-48.665 17.41-24.383-.172-42.854-8.007-54.913-23.292C34.577 127.92 29.3 111.809 29.096 91.82c.206-19.99 5.482-36.1 15.69-47.92 12.059-13.286 30.53-21.12 54.913-23.292l.34-.026c24.078-.196 42.637 7.595 55.01 23.15a66.52 66.52 0 0 1 4.508 7.222l14.598-9.167C163.007 24.04 142.24 13.96 99.923 14c-30.21.205-53.234 9.82-68.418 28.57C20.223 57.259 14.01 77.83 13.8 99.978c.209 22.148 6.423 42.72 17.706 57.408 15.183 18.75 38.207 28.365 68.417 28.57 40.04-.28 62.557-13.726 78.36-29.456 21.166-21.073 20.506-47.704 13.508-64.025-5.001-11.832-14.74-21.244-49.254-2.487z"/></svg>
-            Threads
-          </a>
-          <button class="share-btn" id="copy-btn" onclick="copyResult('${top.name}','${top.ja}')">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            コピー
-          </button>
         </div>
       </div>
 
       <div class="panel">
-        <div class="panel-title">パターンマッチ度（スコアリング結果）</div>
+        <div class="panel-title">パターンマッチ度</div>
         <div class="match-grid">
           ${top5.map((p,i)=>`
             <div class="match-item${i===0?' top':''}">
@@ -1335,130 +1421,140 @@ function showResult() {
               <span class="match-pct">${p.pct}%</span>
             </div>`).join('')}
         </div>
-        <p style="font-size:0.7rem;color:var(--muted);margin-top:0.8rem;">スコアが高いほどあなたの回答との一致度が高いパターンです（最上位が診断結果）</p>
       </div>
     </div>
 
-    <div class="result-section">
-      <div class="panel">
-        <div class="panel-title">デイリールーティン</div>
-        ${routine.cleans.needed ? `
-          <div class="cleansing-notice">
-            <div class="cleansing-icon">💧</div>
+    <div class="bento-card">
+      <div class="bento-card-header">
+        <span class="bento-card-title">🧪 RECOMMENDED INGREDIENTS</span>
+        <span class="bento-card-badge">注目成分</span>
+      </div>
+      <div class="ingredient-wrap">
+        ${ingredients.map(ing=>`<span class="ing-tag${ing.key?' key':''}">${ing.name}</span>`).join('')}
+      </div>
+      <div class="ingredient-rationale">
+        <p>${top.rationale}</p>
+      </div>
+    </div>
+
+    <div class="bento-card">
+      <div class="bento-card-header">
+        <span class="bento-card-title">📋 ROUTINE ARCHITECTURE</span>
+        <span class="bento-card-badge">Daily</span>
+      </div>
+      ${routine.cleans.needed ? `
+        <div class="cleansing-notice">
+          <div class="cleansing-icon">💧</div>
+          <div>
+            <div class="cleansing-title">クレンジングを推奨します</div>
+            <div class="cleansing-text">${routine.cleans.triggers.join('・')}を使用しているため、夜の洗顔前にクレンジングが必要です。</div>
+          </div>
+        </div>` : ''}
+      <div class="routine-cols">
+        <div class="routine-col-am">
+          <div class="routine-col-label"><span class="routine-time-icon">☀️</span>AM_SEQ</div>
+          <div class="routine-steps">
+            ${routine.am.map((s,i)=>`
+              <div class="routine-step${s.highlight?' highlight':''}">
+                <span class="step-num">0${i+1}</span>
+                <div><div class="step-name">${s.name}</div><div class="step-note">${s.note}</div></div>
+              </div>`).join('')}
+          </div>
+        </div>
+        <div class="routine-col-pm">
+          <div class="routine-col-label pm"><span class="routine-time-icon">🌙</span>PM_SEQ</div>
+          <div class="routine-steps">
+            ${routine.pm.map((s,i)=>`
+              <div class="routine-step${s.highlight?' highlight':''}">
+                <span class="step-num">0${i+1}</span>
+                <div><div class="step-name">${s.name}</div><div class="step-note">${s.note}</div></div>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <p style="font-size:0.7rem;color:var(--muted);margin-top:0.8rem;">💡 青枠ハイライト = あなたの肌に特に重要なステップ</p>
+    </div>
+
+    <div class="bento-card">
+      <div class="bento-card-header">
+        <span class="bento-card-title">💡 PERSONALIZED ADVICE</span>
+      </div>
+      <div class="advice-list">
+        ${advice.map((adv,i)=>`
+          <div class="advice-item">
+            <div class="advice-num">${i+1}</div>
             <div>
-              <div class="cleansing-title">クレンジングを推奨します</div>
-              <div class="cleansing-text">${routine.cleans.triggers.join('・')}を使用しているため、夜の洗顔前にクレンジングが必要です。通常の洗顔だけでは落ちきらず、毛穴詰まり・酸化汚れの原因になります。</div>
+              <div class="advice-title">${adv.title}</div>
+              <div class="advice-text">${adv.text}</div>
             </div>
-          </div>` : ''}
-        <div class="routine-cols">
-          <div>
-            <div class="routine-col-label">AM Morning</div>
-            <div class="routine-steps">
-              ${routine.am.map((s,i)=>`
-                <div class="routine-step${s.highlight?' highlight':''}">
-                  <span class="step-num">0${i+1}</span>
-                  <div><div class="step-name">${s.name}</div><div class="step-note">${s.note}</div></div>
-                </div>`).join('')}
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="bento-card">
+      <div class="bento-card-header">
+        <span class="bento-card-title">🧴 TARGET GEAR</span>
+        <span class="bento-card-badge">おすすめ商品</span>
+      </div>
+      <div class="product-grid">
+        ${buildProducts(top.id).map(p=>`
+          <a href="${p.url}" class="product-card" target="_blank" rel="noopener sponsored">
+            <div class="product-cat">${p.cat}</div>
+            <div class="product-body">
+              <div class="product-name">${p.name}</div>
+              <div class="product-price">${p.price}</div>
+              <div class="product-point">${p.point}</div>
             </div>
-          </div>
-          <div>
-            <div class="routine-col-label pm">PM Evening</div>
-            <div class="routine-steps">
-              ${routine.pm.map((s,i)=>`
-                <div class="routine-step${s.highlight?' highlight':''}">
-                  <span class="step-num">0${i+1}</span>
-                  <div><div class="step-name">${s.name}</div><div class="step-note">${s.note}</div></div>
-                </div>`).join('')}
+            <div class="product-arr">→</div>
+          </a>`).join('')}
+      </div>
+      <p class="product-notice">※ リンク先はアフィリエイト広告を含みます。診断結果に基づく推奨ですが、肌の状態には個人差があります。購入前に成分・使用上の注意をご確認ください。</p>
+    </div>
+
+    <div class="bento-card">
+      <div class="bento-card-header">
+        <span class="bento-card-title">🎯 NEXT STEP</span>
+      </div>
+      <div class="cta-grid">
+        ${ctas.map(c=>`
+          <a href="${c.url}" class="cta-btn ${c.cls}" target="_blank" rel="noopener sponsored">
+            <div class="cta-icon">${c.icon}</div>
+            <div class="cta-body">
+              <div class="cta-title-text">${c.title}</div>
+              <div class="cta-desc-text">${c.desc}</div>
             </div>
-          </div>
-        </div>
-        <p style="font-size:0.7rem;color:var(--muted);margin-top:0.8rem;">💡 青枠ハイライト = あなたの肌に特に重要なステップ</p>
-      </div>
-    </div>
-
-    <div class="result-section">
-      <div class="panel">
-        <div class="panel-title">注目すべき成分</div>
-        <div class="ingredient-wrap">
-          ${ingredients.map(ing=>`<span class="ing-tag${ing.key?' key':''}">${ing.name}</span>`).join('')}
-        </div>
-        <p style="font-size:0.7rem;color:var(--muted);margin-top:0.8rem;">青ハイライト = あなたの肌課題に特に有効な成分</p>
-        <div class="ingredient-rationale">
-          <p>${top.rationale}</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="result-section">
-      <div class="panel">
-        <div class="panel-title">パーソナライズドアドバイス</div>
-        <div class="advice-list">
-          ${advice.map((adv,i)=>`
-            <div class="advice-item">
-              <div class="advice-num">${i+1}</div>
-              <div>
-                <div class="advice-title">${adv.title}</div>
-                <div class="advice-text">${adv.text}</div>
-              </div>
-            </div>`).join('')}
-        </div>
-      </div>
-    </div>
-
-    <div class="result-section">
-      <div class="panel">
-        <div class="panel-title">あなたへのおすすめ商品</div>
-        <div class="product-grid">
-          ${buildProducts(top.id).map(p=>`
-            <a href="${p.url}" class="product-card" target="_blank" rel="noopener sponsored">
-              <div class="product-cat">${p.cat}</div>
-              <div class="product-body">
-                <div class="product-name">${p.name}</div>
-                <div class="product-price">${p.price}</div>
-                <div class="product-point">${p.point}</div>
-              </div>
-              <div class="product-arr">→</div>
-            </a>`).join('')}
-        </div>
-        <p class="product-notice">※ リンク先はアフィリエイト広告を含みます。診断結果に基づく推奨ですが、肌の状態には個人差があります。購入前に成分・使用上の注意をご確認ください。</p>
-      </div>
-    </div>
-
-    <div class="result-section">
-      <div class="panel">
-        <div class="panel-title">Next Step</div>
-        <div class="cta-grid">
-          ${ctas.map(c=>`
-            <a href="${c.url}" class="cta-btn ${c.cls}" target="_blank" rel="noopener sponsored">
-              <div class="cta-icon">${c.icon}</div>
-              <div class="cta-body">
-                <div class="cta-title-text">${c.title}</div>
-                <div class="cta-desc-text">${c.desc}</div>
-              </div>
-              <div class="cta-arr">→</div>
-            </a>`).join('')}
-        </div>
+            <div class="cta-arr">→</div>
+          </a>`).join('')}
       </div>
     </div>
 
     ${(() => {
       const clinic = buildClinicCta(top.id);
       return `
-    <div class="result-section">
-      <div class="panel">
-        <div class="panel-title">${clinic.priority ? 'クリニック治療という選択肢' : '専門家への相談'}</div>
-        <a href="${CLINIC_URL}" class="clinic-cta" target="_blank" rel="nofollow noopener sponsored">
-          <div class="clinic-cta-icon">${clinic.priority ? '🏥' : '💬'}</div>
-          <div class="clinic-cta-body">
-            <div class="clinic-cta-label">Men's Clinic</div>
-            <div class="clinic-cta-title">${clinic.title}</div>
-            <div class="clinic-cta-desc">${clinic.desc}</div>
-          </div>
-          <div class="clinic-cta-arr">→</div>
-        </a>
-        <p class="clinic-cta-notice">※ アフィリエイト広告を含みます</p>
-        <img src="${CLINIC_PIXEL}" width="1" height="1" style="border:none;display:none;" loading="lazy" alt="">
+    <div class="bento-card">
+      <div class="bento-card-header">
+        <span class="bento-card-title">${clinic.priority ? '🏥 CLINIC OPTION' : '💬 EXPERT CONSULT'}</span>
       </div>
+      <a href="${CLINIC_URL}" class="clinic-cta" target="_blank" rel="nofollow noopener sponsored">
+        <div class="clinic-cta-icon">${clinic.priority ? '🏥' : '💬'}</div>
+        <div class="clinic-cta-body">
+          <div class="clinic-cta-label">Men's Clinic</div>
+          <div class="clinic-cta-title">${clinic.title}</div>
+          <div class="clinic-cta-desc">${clinic.desc}</div>
+        </div>
+        <div class="clinic-cta-arr">→</div>
+      </a>
+      <p class="clinic-cta-notice">※ アフィリエイト広告を含みます</p>
+      <a href="/acne-clinic.html" class="clinic-cta" style="margin-top:0.8rem;background:var(--white);" onclick="gtag('event','acne_clinic_page_click',{from:'result',skin_type:'${top.id}'})">
+        <div class="clinic-cta-icon">📋</div>
+        <div class="clinic-cta-body">
+          <div class="clinic-cta-label">Clinic Guide</div>
+          <div class="clinic-cta-title">ニキビ・肌荒れに対応するクリニック一覧を見る</div>
+          <div class="clinic-cta-desc">オンラインで相談できる美容皮膚科クリニックを比較できます</div>
+        </div>
+        <div class="clinic-cta-arr">→</div>
+      </a>
+      <img src="${CLINIC_PIXEL}" width="1" height="1" style="border:none;display:none;" loading="lazy" alt="">
     </div>`;
     })()}
 
@@ -1468,7 +1564,22 @@ function showResult() {
       <img src="//i.moshimo.com/af/i/impression?a_id=5452479&p_id=54&pc_id=54&pl_id=620" width="1" height="1" style="border:none;" loading="lazy">
     </div>
 
-    <button class="retake-btn" onclick="retake()">← もう一度診断する</button>
+    <div class="share-grid">
+      <a id="share-x" class="share-grid-btn share-x" href="#" target="_blank" rel="noopener">
+        <span class="share-grid-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
+        POST
+      </a>
+      <a id="share-threads" class="share-grid-btn share-threads" href="#" target="_blank" rel="noopener">
+        <span class="share-grid-icon"><svg width="16" height="16" viewBox="0 0 192 192" fill="currentColor"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.05l13.124 9.027c5.741-8.704 14.76-10.567 21.996-10.567h.23c8.498.054 14.911 2.519 19.06 7.33 3.01 3.493 5.023 8.32 5.984 14.402a100.497 100.497 0 0 0-24.53-.096c-24.794 1.424-40.743 15.835-39.752 35.83.503 10.108 5.553 18.8 14.218 24.516 7.37 4.883 16.86 7.26 26.725 6.714 13.007-.727 23.23-5.667 30.375-14.676 5.502-6.941 8.96-15.92 10.455-27.217 6.267 3.782 10.901 8.766 13.465 14.834 4.419 10.446 4.678 27.562-9.098 41.264-12.108 12.039-26.676 17.26-48.665 17.41-24.383-.172-42.854-8.007-54.913-23.292C34.577 127.92 29.3 111.809 29.096 91.82c.206-19.99 5.482-36.1 15.69-47.92 12.059-13.286 30.53-21.12 54.913-23.292l.34-.026c24.078-.196 42.637 7.595 55.01 23.15a66.52 66.52 0 0 1 4.508 7.222l14.598-9.167C163.007 24.04 142.24 13.96 99.923 14c-30.21.205-53.234 9.82-68.418 28.57C20.223 57.259 14.01 77.83 13.8 99.978c.209 22.148 6.423 42.72 17.706 57.408 15.183 18.75 38.207 28.365 68.417 28.57 40.04-.28 62.557-13.726 78.36-29.456 21.166-21.073 20.506-47.704 13.508-64.025-5.001-11.832-14.74-21.244-49.254-2.487z"/></svg></span>
+        THREADS
+      </a>
+      <button class="share-grid-btn share-copy" id="copy-btn" onclick="copyResult('${top.name}','${top.ja}')">
+        <span class="share-grid-icon">🔗</span>
+        COPY
+      </button>
+    </div>
+
+    <button class="retake-btn-dash" onclick="retake()">REBOOT DIAGNOSIS</button>
 
     <div style="margin-top:12px;padding:1rem;background:#f6f8fb;border:1px solid rgba(26,78,128,0.1);border-radius:10px;">
       <div style="font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.14em;color:#5a7d8a;text-transform:uppercase;margin-bottom:0.6rem;">Reference — 参考情報</div>
@@ -1510,9 +1621,15 @@ function showResult() {
     </a>
   `;
 
-  document.getElementById('loading-screen').style.display = 'none';
-  el.style.display = 'block';
-  window.scrollTo({top:0, behavior:'smooth'});
+  const loadEl = document.getElementById('loading-screen');
+  loadEl.classList.add('screen-exit');
+  setTimeout(() => {
+    loadEl.style.display = 'none';
+    loadEl.classList.remove('screen-exit', 'screen-enter');
+    el.style.display = 'block';
+    el.classList.add('screen-enter');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }, 300);
 
   setTimeout(() => {
     el.querySelectorAll('.score-bar').forEach(b => b.style.width = b.dataset.val + '%');
@@ -1538,11 +1655,18 @@ function retake() {
   gtag('event', 'quiz_retake', { site: 'SKIN CODE' });
   currentQ = 0;
   Object.keys(answers).forEach(k => delete answers[k]);
-  document.getElementById('result-screen').style.display = 'none';
-  document.getElementById('result-screen').innerHTML = '';
-  document.getElementById('quiz-screen').style.display = 'block';
-  renderQ();
-  window.scrollTo({top:0, behavior:'smooth'});
+  const resultEl = document.getElementById('result-screen');
+  resultEl.classList.add('screen-exit');
+  setTimeout(() => {
+    resultEl.style.display = 'none';
+    resultEl.innerHTML = '';
+    resultEl.classList.remove('screen-exit', 'screen-enter');
+    const quizEl = document.getElementById('quiz-screen');
+    quizEl.style.display = 'block';
+    quizEl.classList.add('screen-enter');
+    renderQ();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }, 300);
 }
 
 renderQ();
