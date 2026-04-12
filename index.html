@@ -1126,8 +1126,8 @@ function buildSkinScores(answers, patternId) {
 // ─────────────────────────────────────────────
 // CLINIC CTA BUILDER
 // ─────────────────────────────────────────────
-const CLINIC_URL = 'https://t.afi-b.com/visit.php?a=58658u-V292891c&p=k844808E';
-const CLINIC_PIXEL = 'https://t.afi-b.com/lead/58658u/k844808E/V292891c';
+const CLINIC_URL = 'https://t.afi-b.com/visit.php?a=58658u-u292890r&p=k844808E';
+const CLINIC_PIXEL = 'https://t.afi-b.com/lead/58658u/k844808E/u292890r';
 
 function buildClinicCta(patternId) {
   const map = {
@@ -1166,58 +1166,78 @@ function buildCtas(answers) {
 // ─────────────────────────────────────────────
 const PRODUCT_SETS = {
   oily_acne: [
-    { cat:'洗顔料', name:'メンズビオレ 泡スタイル洗顔 さっぱり', price:'¥600前後', point:'皮脂をしっかり除去。アミノ酸系で洗いすぎない', url:'#' },
-    { cat:'化粧水', name:'ルシード 薬用 トータルケア化粧水', price:'¥1,000前後', point:'さっぱりタイプ・皮脂コントロール成分配合', url:'#' },
-    { cat:'ニキビケア', name:'ペアアクネクリームW', price:'¥700前後', point:'薬用ニキビ治療薬（市販）。炎症・ニキビ跡に直接ケア', url:'#' },
-    { cat:'保湿', name:'ニベア メン さっぱりジェル', price:'¥700前後', point:'油分少なめで毛穴詰まりを防ぎながら水分補給', url:'#' },
+    { cat:'クレンジング', name:'カウブランド 無添加メイク落としオイル', price:'¥700前後', point:'無添加・低刺激で摩擦なく日焼け止めを落とせる', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakutensokuhaimart%2F4901525004305%2F' },
+    { cat:'洗顔', name:'ロゼット 洗顔パスタ アクネクリア', price:'¥400前後', point:'ニキビ用洗顔でAmazon上位常連・コスパ最強', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frosette-shop%2Fpasta_ac240_1ps%2F' },
+    { cat:'化粧水', name:'肌ラボ 薬用 極潤スキンコンディショナー', price:'¥700前後', point:'殺菌+消炎成分配合・ニキビ肌向け薬用化粧水', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2Fe393567h%2F' },
+    { cat:'保湿', name:'ニベアメン オイルコントロールローション', price:'¥700前後', point:'テカリ抑制+保湿の両立', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F4901301379320%2F' },
+    { cat:'スポットケア', name:'ペアアクネクリームW', price:'¥700前後', point:'薬用ニキビ治療薬・市販No.1評価', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fsundrug%2F4903301025726%2F' },
+    { cat:'日焼け止め', name:'スキンアクア トーンアップUVエッセンス', price:'¥700前後', point:'軽い付け心地・ニキビ肌に負担が少ない', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24-cosmetics%2F406119%2F' },
   ],
   dry_sensitive: [
-    { cat:'洗顔料', name:'キュレル 泡洗顔', price:'¥1,200前後', point:'敏感肌向け低刺激処方。セラミド機能成分で洗いながら保護', url:'#' },
-    { cat:'化粧水', name:'キュレル 潤浸保湿化粧水', price:'¥1,500前後', point:'セラミド配合・刺激が少なく敏感肌でも安心', url:'#' },
-    { cat:'保湿', name:'キュレル 保湿クリーム', price:'¥1,200前後', point:'敏感肌の定番。バリア機能をしっかり整える', url:'#' },
-    { cat:'韓国コスメ', name:'Dr.Jart+ シカペア リカバー クリーム', price:'¥3,000前後', point:'シカ（ツボクサエキス）配合の鎮静・修復特化クリーム。赤みや荒れにダイレクトアプローチ', url:'#' },
+    { cat:'クレンジング', name:'ビフェスタ クレンジングローション モイスト', price:'¥700前後', point:'拭き取り型・保湿成分入りで乾燥肌に優しい', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fhc7%2F4902806113143%2F' },
+    { cat:'洗顔', name:'キュレル 泡洗顔料', price:'¥1,200前後', point:'敏感肌向けNo.1・セラミド処方', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Ftsuruha%2F10045591%2F' },
+    { cat:'化粧水', name:'キュレル 潤浸保湿 化粧水 II しっとり', price:'¥1,500前後', point:'乾燥性敏感肌の定番・皮膚科推奨レベル・男性にはIIが適度', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fladydrug%2F4901301236180%2F' },
+    { cat:'保湿クリーム', name:'キュレル 潤浸保湿 フェイスクリーム', price:'¥1,200前後', point:'セラミド配合・敏感肌クリームで最高評価クラス', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fsundrug%2F4901301236210%2F' },
+    { cat:'オプション', name:'ミノン メン 薬用フェイスミルク', price:'¥1,600前後', point:'男性の皮脂量・皮膚厚に合わせた処方・低刺激', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Ftimesstore%2F3326-000105%2F' },
+    { cat:'日焼け止め', name:'キュレル UVカット UVエッセンス', price:'¥1,500前後', point:'敏感肌向けUV・セラミド配合・低刺激設計', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fsup-s-r%2Fcurel-uv-essence%2F' },
   ],
   combo: [
-    { cat:'洗顔料', name:'バルクオム THE FACE WASH', price:'¥2,000前後', point:'洗いすぎず・残らず。混合肌のバランスを整える', url:'#' },
-    { cat:'化粧水', name:'ルシード オイルコントロール化粧水', price:'¥1,000前後', point:'皮脂と乾燥のバランスを同時に調整', url:'#' },
-    { cat:'乳液', name:'キュレル 皮脂トラブルケア 乳液', price:'¥1,500前後', point:'混合肌に特化した処方。Tゾーン・頬の両方に対応', url:'#' },
+    { cat:'クレンジング', name:'ビフェスタ クレンジングローション さっぱり', price:'¥700前後', point:'拭き取り型・さっぱり仕上がりで混合肌向き', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fhc888%2F4902806113136%2F' },
+    { cat:'洗顔', name:'ORBIS Mr. フェイシャルクレンザー', price:'¥1,500前後', point:'皮脂と潤いのバランスに特化したメンズライン', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2F0101marui%2Fto605190470101%2F' },
+    { cat:'化粧水', name:'無印良品 化粧水 敏感肌用 さっぱりタイプ', price:'¥600前後', point:'低刺激・さっぱり・コスパ抜群', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fmujirushi-ryohin%2F4550583434960%2F' },
+    { cat:'乳液', name:'キュレル 皮脂トラブルケア 保湿ジェル', price:'¥1,500前後', point:'Tゾーンのテカリ+頬の乾燥に両対応', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fladydrug%2F4901301264350%2F' },
+    { cat:'日焼け止め', name:'ビオレUV アクアリッチ ウォータリーエッセンス', price:'¥700前後', point:'軽い付け心地・ベタつかない', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fsaikatu%2F10008732%2F' },
   ],
   aging: [
-    { cat:'洗顔料', name:'バルクオム THE FACE WASH', price:'¥2,000前後', point:'しっとり洗い上がり。年齢肌に優しいアミノ酸系', url:'#' },
-    { cat:'化粧水', name:'ルシード 薬用 スキンフルード', price:'¥1,500前後', point:'エイジングケア成分配合。ハリ・ツヤにアプローチ', url:'#' },
-    { cat:'乳液', name:'バルクオム THE LOTION', price:'¥3,000前後', point:'高保湿処方。うるおい成分を角質層へしっかり届ける', url:'#' },
-    { cat:'エイジングケア', name:'ニベア メン アクティブエイジ', price:'¥800前後', point:'手頃なエイジングケア。まず試したい方に最適', url:'#' },
+    { cat:'クレンジング', name:'ビフェスタ クレンジングローション モイスト', price:'¥700前後', point:'拭き取り型・保湿成分入り', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fhc7%2F4902806113143%2F' },
+    { cat:'洗顔', name:'DOVE Men+Care クリーンコンフォート 泡洗顔', price:'¥500前後', point:'保湿成分配合・洗いすぎない・コスパ良い', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fcosmebox%2Fj4902111722689%2F' },
+    { cat:'化粧水', name:'ルシード 薬用 トータルケア化粧水', price:'¥1,000前後', point:'40代メンズに人気・エイジングケア成分配合', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fsundrug%2F4902806107296%2F' },
+    { cat:'乳液', name:'バルクオム THE LOTION', price:'¥3,000前後', point:'浸透力高い・エイジング世代に好評', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fpassage-mens%2F10017338%2F' },
+    { cat:'オプション', name:'ニベアメン アクティブエイジバーム', price:'¥800前後', point:'手頃なエイジングケア・入門に最適', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fes-ryuseido%2F4901301379306%2F' },
+    { cat:'日焼け止め', name:'ビオレUV アクアリッチ ウォータリーエッセンス', price:'¥700前後', point:'エイジングの大敵は紫外線・軽い使用感', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fsaikatu%2F10008732%2F' },
   ],
   glow: [
-    { cat:'洗顔料', name:'メンズビオレ 泡スタイル洗顔 さっぱり', price:'¥600前後', point:'毛穴の汚れ・くすみの原因をしっかりオフ', url:'#' },
-    { cat:'化粧水', name:'肌ラボ 白潤プレミアム 薬用浸透美白化粧水', price:'¥1,000前後', point:'トラネキサム酸配合・くすみ・色ムラにアプローチ', url:'#' },
-    { cat:'保湿', name:'ニベア メン クリームケア 保湿ジェル', price:'¥700前後', point:'ベタつかないジェルで清潔感のある仕上がりに', url:'#' },
+    { cat:'クレンジング', name:'ビフェスタ クレンジングローション さっぱり', price:'¥700前後', point:'拭き取り型・くすみの原因になる残留汚れを除去', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fhc888%2F4902806113136%2F' },
+    { cat:'洗顔', name:'suisai ビューティクリア パウダーウォッシュN', price:'¥1,800前後', point:'酵素洗顔でくすみ・角質除去に特化', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F406072%2F' },
+    { cat:'化粧水', name:'肌ラボ 白潤 薬用美白化粧水', price:'¥700前後', point:'アルブチン配合・くすみ対策・コスパ良し', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F4987241194490%2F' },
+    { cat:'保湿', name:'メラノCC 薬用しみ集中対策美容液', price:'¥1,000前後', point:'ビタミンC美容液でAmazon男女ともベストセラー', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F4987241169658%2F' },
+    { cat:'日焼け止め', name:'ビオレUV アクアリッチ ウォータリーエッセンス', price:'¥700前後', point:'くすみ予防の基本・軽い付け心地', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fsaikatu%2F10008732%2F' },
   ],
   stressed: [
-    { cat:'洗顔料', name:'キュレル 泡洗顔', price:'¥1,200前後', point:'刺激を最小限に。荒れた肌をいたわりながら洗浄', url:'#' },
-    { cat:'化粧水', name:'キュレル 潤浸保湿化粧水', price:'¥1,500前後', point:'セラミドでバリアを整える。ストレスで乱れた肌をケア', url:'#' },
-    { cat:'保湿', name:'ミノン アミノモイスト モイストチャージ ローション', price:'¥1,800前後', point:'アミノ酸系低刺激処方。敏感・ストレス肌をやさしくケア', url:'#' },
+    { cat:'クレンジング', name:'ビフェスタ クレンジングローション モイスト', price:'¥700前後', point:'拭き取り型・荒れた肌にも低刺激', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fhc7%2F4902806113143%2F' },
+    { cat:'洗顔', name:'カウブランド 無添加うるおい洗顔', price:'¥500前後', point:'無添加・肌に負担をかけない', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2Fa003200200087%2F' },
+    { cat:'化粧水', name:'無印良品 化粧水 敏感肌用 しっとりタイプ', price:'¥700前後', point:'シンプル処方・荒れた肌にも低刺激', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fmujirushi-ryohin%2F4550583434960%2F' },
+    { cat:'保湿', name:'肌ラボ 極潤 ヒアルロン乳液', price:'¥700前後', point:'ヒアルロン酸配合・しっかり保湿', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2Fa003223385511%2F' },
+    { cat:'サプリ', name:'ディアナチュラ ビタミンB群', price:'¥500前後', point:'肌荒れ時のインナーケア定番・皮膚のビタミン', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fsundrug%2F4946842635337%2F' },
+    { cat:'日焼け止め', name:'スキンアクア モイスチャージェル', price:'¥600前後', point:'ジェルタイプで肌負担が少ない・ストレス肌に優しい', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fseikatsuzakka-plus1%2F4987241190850%2F' },
   ],
   outdoor_uv: [
-    { cat:'洗顔料', name:'メンズビオレ 泡スタイル洗顔 さっぱり', price:'¥600前後', point:'蓄積したUV汚れ・外的ダメージをしっかり除去', url:'#' },
-    { cat:'化粧水', name:'肌ラボ 白潤プレミアム 薬用浸透美白化粧水', price:'¥1,000前後', point:'紫外線によるくすみ・シミをトラネキサム酸でケア', url:'#' },
-    { cat:'保湿', name:'ニベア メン クリームケア 保湿ジェル', price:'¥700前後', point:'UVダメージで失われた水分を補給。さっぱり仕上がり', url:'#' },
+    { cat:'クレンジング', name:'ビフェスタ クレンジングローション さっぱり', price:'¥700前後', point:'高SPF日焼け止めの残留を拭き取りで簡単除去', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fhc888%2F4902806113136%2F' },
+    { cat:'洗顔', name:'ビオレ おうちdeエステ 洗顔ジェル なめらか', price:'¥600前後', point:'毛穴汚れ+日焼け止め落としに効果的', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2Fe522702h%2F' },
+    { cat:'化粧水', name:'ナチュリエ ハトムギ化粧水', price:'¥600前後', point:'日焼け後のクールダウン・大容量でバシャバシャ使える', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fat-life%2F4903335695254%2F' },
+    { cat:'アフターケア', name:'肌ラボ 極潤 ヒアルロン液', price:'¥700前後', point:'UV後の保湿補給・コスパ良し', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fsundrug%2F4987241155767%2F' },
+    { cat:'日焼け止め', name:'アネッサ パーフェクトUV スキンケアミルク', price:'¥2,500前後', point:'最強UV防御・スポーツ対応・Amazon日焼け止め1位', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F4909978147105%2F' },
   ],
   combo_aging: [
-    { cat:'洗顔料', name:'バルクオム THE FACE WASH', price:'¥2,000前後', point:'年齢混合肌のデリケートなバランスを保つ洗顔', url:'#' },
-    { cat:'化粧水', name:'ルシード 薬用 スキンフルード', price:'¥1,500前後', point:'エイジングケア成分配合。皮脂コントロールもサポート', url:'#' },
-    { cat:'乳液', name:'キュレル 皮脂トラブルケア 乳液', price:'¥1,500前後', point:'混合肌の皮脂バランスを整えながらエイジングケアも', url:'#' },
+    { cat:'クレンジング', name:'ビフェスタ クレンジングローション さっぱり', price:'¥700前後', point:'拭き取り型・さっぱり仕上がり', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fhc888%2F4902806113136%2F' },
+    { cat:'洗顔', name:'ORBIS Mr. フェイシャルクレンザー', price:'¥1,500前後', point:'皮脂と潤いのバランスに特化したメンズライン', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2F0101marui%2Fto605190470101%2F' },
+    { cat:'化粧水', name:'ルシード 薬用 トータルケア化粧水', price:'¥1,000前後', point:'エイジング+皮脂ケアの両立', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fsundrug%2F4902806107296%2F' },
+    { cat:'乳液', name:'キュレル 皮脂トラブルケア 保湿ジェル', price:'¥1,500前後', point:'混合肌向け・軽いテクスチャー', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fladydrug%2F4901301264350%2F' },
+    { cat:'美容液', name:'メラノCC 薬用しみ集中対策美容液', price:'¥1,000前後', point:'エイジングスポット対策に', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F4987241169658%2F' },
+    { cat:'日焼け止め', name:'ビオレUV アクアリッチ ウォータリーエッセンス', price:'¥700前後', point:'エイジング予防に必須・軽い使用感', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fsaikatu%2F10008732%2F' },
   ],
   beginner: [
-    { cat:'洗顔料', name:'肌ラボ 極潤 洗顔フォーム', price:'¥800前後', point:'コスパ◎ 低刺激で初心者でも使いやすい定番洗顔', url:'#' },
-    { cat:'化粧水', name:'肌ラボ 極潤 ヒアルロン液', price:'¥1,000前後', point:'コスパに優れたヒアルロン酸化粧水。保湿の基礎が整う', url:'#' },
-    { cat:'保湿', name:'ニベア メン クリームケア 保湿ジェル', price:'¥700前後', point:'ベタつかず毎日続けやすい。初心者の1本目に最適', url:'#' },
-    { cat:'オールインワン', name:'バルクオム THE ALL-IN-ONE GEL', price:'¥3,500前後', point:'化粧水・乳液・美容液が1本に。忙しい朝でも時短ケア完結', url:'#' },
+    { cat:'クレンジング', name:'ビフェスタ クレンジングローション さっぱり', price:'¥700前後', point:'拭き取り型で簡単・初心者でも続けやすい', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fhc888%2F4902806113136%2F' },
+    { cat:'洗顔', name:'DOVE Men+Care クリーンコンフォート 泡洗顔', price:'¥500前後', point:'泡で出るから楽・保湿成分入りで洗いすぎない', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fcosmebox%2Fj4902111722689%2F' },
+    { cat:'化粧水', name:'肌ラボ 極潤 ヒアルロン液', price:'¥700前後', point:'メンズスキンケア入門の定番・コスパ最強', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fsundrug%2F4987241155767%2F' },
+    { cat:'オールインワン', name:'ニベアメン センシティブローション', price:'¥600前後', point:'1本で完結・面倒くさがりに最適', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakutensokuhaimart%2F4901301379290%2F' },
+    { cat:'日焼け止め', name:'ニベアサン ウォータージェル SPF50', price:'¥600前後', point:'ジェルで塗りやすい・初心者に最適な使用感', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24-cosmetics%2F4901301298690%2F' },
   ],
   balanced: [
-    { cat:'洗顔料', name:'バルクオム THE FACE WASH', price:'¥2,000前後', point:'バランス肌に最適。適切な洗浄力で肌を整える', url:'#' },
-    { cat:'化粧水', name:'肌ラボ 極潤 ヒアルロン液', price:'¥1,000前後', point:'コスパ◎ ヒアルロン酸配合で安定した保湿を維持', url:'#' },
-    { cat:'保湿', name:'ニベア メン クリームケア 保湿ジェル', price:'¥700前後', point:'バランス肌をキープする軽めの保湿ジェル', url:'#' },
+    { cat:'クレンジング', name:'ビフェスタ クレンジングローション さっぱり', price:'¥700前後', point:'拭き取り型で日焼け止めオフ', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fhc888%2F4902806113136%2F' },
+    { cat:'洗顔', name:'無印良品 マイルド洗顔フォーム', price:'¥400前後', point:'シンプルで良い肌状態を崩さない', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fmujirushi-ryohin%2F4550584464898%2F' },
+    { cat:'化粧水', name:'無印良品 化粧水 敏感肌用 さっぱりタイプ', price:'¥600前後', point:'シンプルで肌バランスを崩さない', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fmujirushi-ryohin%2F4550583434960%2F' },
+    { cat:'日焼け止め', name:'ビオレUV アクアリッチ ウォータリーエッセンス', price:'¥700前後', point:'予防ケアとして・軽い使用感', url:'//af.moshimo.com/af/c/click?a_id=5452479&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fsaikatu%2F10008732%2F' },
   ],
 };
 
@@ -1671,5 +1691,11 @@ function retake() {
 
 renderQ();
 </script>
+<footer style="border-top:1px solid #d4e3f2;padding:1.5rem 1.25rem;text-align:center;font-size:0.7rem;color:#6b7e99;font-family:'Noto Sans JP',sans-serif;background:#f7fbff;">
+  <a href="/about.html" style="color:#6b7e99;text-decoration:none;margin:0 0.55rem;">運営者情報</a>
+  <a href="/privacy.html" style="color:#6b7e99;text-decoration:none;margin:0 0.55rem;">プライバシーポリシー</a>
+  <a href="/contact.html" style="color:#6b7e99;text-decoration:none;margin:0 0.55rem;">お問い合わせ</a>
+  <div style="margin-top:0.5rem;">© SKIN CODE</div>
+</footer>
 </body>
 </html>
